@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Edu+SA+Beginner:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+
+
+header{
+    background-color: #0066b3;
+    color: #fff;
+    /* min-height: 100px; */
+    
+}
+footer{
+    background-color: #454545;
+    padding: 2rem;
+    color: #fff;
+}
+.menu{
+    background-color: #f4f4f4;
+}
+.modulo.verde-escuro {
+    border: 2px solid #1B5E20;
+}
+.modulo{
+    color: #fff;
+    min-height: 250px;
+}
+.modulo.verde-escuro h3{
+    background-color: #1B5E20;
+}
+
+.modulo.azul-escuro {
+    border: 2px solid #221b5e;
+}
+.modulo.azul-escuro h3{
+    background-color: #221b5e;
+}
+
+.modulo.rosa-chiclete {
+    border: 2px solid #5e1b4e;
+}
+.modulo.rosa-chiclete h3{
+    background-color: #5e1b4e;
+}
+
+.modulo.vermelho-escuro {
+    border: 2px solid #5e1b21;
+}
+.modulo.vermelho-escuro h3{
+    background-color: #5e1b21;
+}
+
+@media(min-width:576px){
+    main{
+        height: calc(100vh - 165px);
+        overflow:auto;
+    }
+    footer{
+        min-height:100px;
+    }
+}
+
+#numero_total{
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    color: #04003e;
+    font-size: 45px;
+}
+
+#span3{
+    color: #04003e;
+}
+
+#recado{
+    font-family: 'Edu SA Beginner', cursive;
+}
+
+#recadotitle{
+    font-family: 'Edu SA Beginner', cursive;
+    color: #0091ff;
+}
+
+#title{
+    font-family: 'Ubuntu', sans-serif;
+}
+a{
+    text-decoration: none;  
+    color: inherit;
+
+}
+
+#subtitle{
+    font-family: 'Ubuntu', sans-serif;
+    color: #04003e;
+}
+
+#title2{
+    color: #04003e;
+}
+
+#msg{
+    color: #0cb300;
+    font-family: 'Open Sans', sans-serif;
+
+}
