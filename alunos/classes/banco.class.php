@@ -2,9 +2,9 @@
 class banco
 {
     private $host = "localhost";
-    private $database = "redesocial";
+    private $database = "afungaz";
     private $user = "root";
-    private $pass = "";
+    private $password = "";
     private $conexao = null;
 
     public function __construct()
@@ -15,7 +15,7 @@ class banco
     {
         try {
             $this->conexao = new PDO("mysql:host=$this->host;
-            dbname=$this->database", "$this->user", "$this->senha");
+            dbname=$this->database", "$this->user", "$this->password");
         } catch (\PDOException $e) {
             echo "Não foi possível estabelecer a conexão 
             com o banco de dados: Erro" . $e->getCode();
@@ -84,9 +84,9 @@ class banco
         }
     }
 
-    public function sigin($cpf, $senha)
+    public function sigin($cpf, $password)
     {
-        $sql = "SELECT * FROM alunos where cpf = '$cpf' and senha = '$senha'";
+        $sql = "SELECT * FROM pessoa where cnpj_cpf = '$cpf' and chavemd5 = '$password'";
         $statement = $this->conexao->prepare($sql);
         $statement->execute();
         $array = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -97,13 +97,9 @@ class banco
         if ($rows) {
             foreach ($array as $key => $value) {
                 session_start();
-                $_SESSION["id"] = $value['id'];
                 $_SESSION["nome"] = $value['nome'];
                 $_SESSION["login"] = true;
-                $_SESSION["id_tipo_usuario"] = $value['id_tipo_usuario'];
-                $_SESSION["cpf"] = $value['cpf'];
-                $_SESSION["email"] = $value['email'];
-                $_SESSION["id_instituicao"] = $value['id_instituicao'];
+                $_SESSION["cnpj_cpf"] = $value['cnpj_cpf'];
             }
             header('location: index.php');
             //funcao direcionar
@@ -122,7 +118,7 @@ class banco
         header('Location: login.php');
     }
 
-    public function createAluno2($email){ //$cpf,$nome,$telefone,$instituicao,$endereco,$rg,$email,$senha,$dias_semana){
+    public function createAluno2($email){
         
         $sql = "SELECT * FROM alunos where email = '{$email}'";
         $statement = $this->conexao->prepare($sql);

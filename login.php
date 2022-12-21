@@ -3,9 +3,9 @@
 
     if($_POST){
         $obj = new banco;
-    	$email = $_POST['cpf'];
-    	$senha = $_POST['senha'];
-    	$obj->sigin($email, $senha);
+    	$cpf = $_POST['cnpj_cpf'];
+    	$password = $_POST['password'];
+    	$obj->sigin($cpf, $password);
     }
 ?>
 
@@ -38,17 +38,17 @@
 						Welcome
 					</span>
 				
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-						<input class="input100" type="text" name="email">
-						<span class="focus-input100" data-placeholder="Email"></span>
+					<div class="wrap-input100 validate-input" >
+						<input class="input100" type="text" name="cnpj_cpf">
+						<span class="focus-input100" data-placeholder="CPF"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100" data-placeholder="Password"></span>
+						<input class="input100" type="password" name="password">
+						<span class="focus-input100" data-placeholder="Senha"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
@@ -76,7 +76,6 @@
 	
 
 	<div id="dropDownSelect1"></div>
-	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="vendor/animsition/js/animsition.min.js"></script>
 	<script src="vendor/bootstrap/js/popper.js"></script>
