@@ -36,16 +36,19 @@ class banco
         }
     }
 
-    public function read($tabela, $id = null)
+    public function readQuioesque()
     {
 
-        if ($id != null) {
-            $condicao = " where id = $id ";
-        } else {
-            $condicao = "";
-        }
+        $sql = 
+        "SELECT a.* 
+            ,l.id_local_origem
+        from agendamento a
+        left join local l on l.id = a.id_local  
+        left join tipo_local t on t.id = l.id_tipo_local
 
-        $sql = "SELECT * FROM $tabela $condicao order by id desc";
+        where t.descricao = 'Quiosque'
+        and a.id_situacao = 1
+        order by a.data_agendamento, l.id_local_origem";
 
         //prepara o sql
         $statement = $this->conexao->prepare($sql);
@@ -55,6 +58,28 @@ class banco
         $array = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $array;
     }
+
+    public function readLocal()
+    {
+
+        $sql = 
+        " SELECT 
+            l.id
+            ,l.id_local_origem
+        from local l
+        left join tipo_local t on t.id = l.id_tipo_local
+
+        where t.descricao = 'Quiosque'
+        order by 1
+
+        ";
+
+        $statement = $this->conexao->prepare($sql);
+        $statement->execute();
+        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $array;
+    }
+    
     
     public function update($id_session,$cpf,$nome,$telefone,$instituicao,$endereco,$rg,$email,$senha,$dias_semana,$id_tipo_usuario)
     {
@@ -115,7 +140,7 @@ class banco
     public function logout(){
         session_destroy();//destruir todas sessões
         $_SESSION['login'] = false;
-        header('Location: login.php');
+        header('Location: ../../../afungaz/login.php');
     }
 
     public function createAluno2($email){
@@ -128,14 +153,16 @@ class banco
        
     }
     
-    public function createAluno($cpf,$nome,$telefone,$instituicao,$endereco,$rg,$email,$senha,$dias_semana){
+    public function createAgendamento($id,$data){
 
-        $sql = "INSERT INTO alunos VALUES (0,'{$cpf}','{$nome}','{$telefone}','{$instituicao}',1,'{$endereco}','{$rg}','{$email}','{$senha}',$dias_semana)";
+        $cpf = $_SESSION['cnpj_cpf']; 
+
+        $sql = "INSERT INTO agendamento VALUES (0,'$cpf','$data',$id,1)";
         $statement = $this->conexao->prepare($sql);
         $resultado = $statement->execute();
         if ($resultado) {
-            echo '<script>alert("Registrado com sucesso! Efetue seu login.");
-            window.location.href="/contador_de_dedinhos/login.php";</script>';
+            echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");
+            window.location.href="/afungaz/index.php";</script>';
             } else {
                echo '<script>alert("Erro no registro!");</script>;';
             }
