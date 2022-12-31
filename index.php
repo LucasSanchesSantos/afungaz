@@ -1,5 +1,5 @@
 <?php
-    include 'pessoa/classes/banco.class.php';
+    include 'agendamento_quioesque/classes/banco.class.php';
     $obj = new banco;
     session_start();
     
@@ -38,7 +38,7 @@
         </div>
     </header> 
 
-    <a href="pessoa/agendamento.php">Agendar</a>
+    <a href="agendamento_quioesque/agendamento.php">Agendar</a>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

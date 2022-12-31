@@ -10,7 +10,11 @@
     }
 
     if($_POST){
-        $obj->createAgendamento($_POST['id_local_origem'],$_POST['data_agendamento']);
+        if($_POST['local_origem'] == 0){
+            echo '<script>alert("Selecione ao menos um Quiosque");</script>';
+        }else{
+            $obj->validaAgendamento($_POST['local_origem'],$_POST['data_agendamento']); 
+        }
     }
 
 ?>
@@ -61,7 +65,7 @@
             $array = $obj->readQuioesque();
             foreach ($array as $key => $row) {
                 echo '<tr>';
-                echo '<th class="text-center">'. $row['id_local_origem'].'</th>';
+                echo '<th class="text-center">'. $row['local_origem'].'</th>';
                 echo '<th class="text-center">'. $row['data_agendamento'].'</th>';
                 echo '<th class="text-center">Agendado</th>';
 
@@ -74,12 +78,12 @@
             <form action="" method="POST">
             <div class="form-group ">
                 <label>Número do quiosque</label>
-                <select required class="form-control" type="integer" name="id_local_origem">
+                <select required class="form-control" type="integer" name="local_origem">
                     <option value="0">Selecione</option>
                     <?php $array = $obj->readLocal();
                     
                     foreach ($array as $key => $row) {
-                        echo '<option value='.$row['id'].'>'.$row['id_local_origem'].'</option>';
+                        echo '<option value='.$row['id'].'>'.$row['local_origem'].'</option>';
                     }
                     ?>
                 </select>

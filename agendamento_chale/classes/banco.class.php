@@ -22,33 +22,18 @@ class banco
         }
     }
 
-    public function create($cpf,$nome,$telefone,$instituicao,$endereco,$rg,$email,$senha,$dias_semana)
-    {
-        $sql = "INSERT INTO alunos VALUES (0,'{$cpf}','{$nome}','{$telefone}','{$instituicao}',1,'{$endereco}','{$rg}','{$email}','{$senha}',$dias_semana)";
-       
-        $statement = $this->conexao->prepare($sql);
-        $resultado = $statement->execute();
-        if ($resultado) {
-            echo '<script>alert("Registrado com sucesso! Efetue seu login.");
-         window.location.href="/contador_de_dedinhos/login.php";</script>';
-        } else {
-            echo '<script>alert("Erro no registro!");</script>;';
-        }
-    }
-
     public function readQuioesque()
     {
-
         $sql = 
         "SELECT a.* 
-            ,l.id_local_origem
+            ,l.local_origem
         from agendamento a
         left join local l on l.id = a.id_local  
         left join tipo_local t on t.id = l.id_tipo_local
 
         where t.descricao = 'Quiosque'
         and a.id_situacao = 1
-        order by a.data_agendamento, l.id_local_origem";
+        order by a.data_agendamento, l.local_origem";
 
         //prepara o sql
         $statement = $this->conexao->prepare($sql);
@@ -61,11 +46,10 @@ class banco
 
     public function readLocal()
     {
-
         $sql = 
         " SELECT 
             l.id
-            ,l.id_local_origem
+            ,l.local_origem
         from local l
         left join tipo_local t on t.id = l.id_tipo_local
 
@@ -81,19 +65,19 @@ class banco
     }
     
     
-    public function update($id_session,$cpf,$nome,$telefone,$instituicao,$endereco,$rg,$email,$senha,$dias_semana,$id_tipo_usuario)
-    {
-        $sql = "UPDATE alunos set id = $id_session,nome = '{$nome}',cpf = '{$cpf}',nome = '{$nome}',telefone = '{$telefone}',id_instituicao = $instituicao,id_tipo_usuario = $id_tipo_usuario,endereco = '{$endereco}',rg = '{$rg}',email = '{$email}',senha = '{$senha}',dias_semana = $dias_semana where id = $id_session" ;
+    // public function update($id_session,$cpf,$nome,$telefone,$instituicao,$endereco,$rg,$email,$senha,$dias_semana,$id_tipo_usuario)
+    // {
+    //     $sql = "UPDATE alunos set id = $id_session,nome = '{$nome}',cpf = '{$cpf}',nome = '{$nome}',telefone = '{$telefone}',id_instituicao = $instituicao,id_tipo_usuario = $id_tipo_usuario,endereco = '{$endereco}',rg = '{$rg}',email = '{$email}',senha = '{$senha}',dias_semana = $dias_semana where id = $id_session" ;
 
-        $statement = $this->conexao->prepare($sql);
-        $update = $statement->execute();
-        if($update){
-            echo '<script> alert("Alterado com sucesso!");
-            window.location.href="/contador_de_dedinhos/index.php";</script>';
-        }else{
-            echo '<script>alert("Erro no registro!")</script>';
-        }
-    }
+    //     $statement = $this->conexao->prepare($sql);
+    //     $update = $statement->execute();
+    //     if($update){
+    //         echo '<script> alert("Alterado com sucesso!");
+    //         window.location.href="/contador_de_dedinhos/index.php";</script>';
+    //     }else{
+    //         echo '<script>alert("Erro no registro!")</script>';
+    //     }
+    // }
 
     public function delete($table, $id){
         $sql = "delete from $table where id = $id";
@@ -132,6 +116,7 @@ class banco
             echo '<script> alert("Login inválido!"); </script>';
         }
     }
+
     public function checkLogin(){
         if(!isset($_SESSION["login"]) or $_SESSION["login"] == false){
             header('Location: login.php');
@@ -141,16 +126,6 @@ class banco
         session_destroy();//destruir todas sessões
         $_SESSION['login'] = false;
         header('Location: ../../../afungaz/login.php');
-    }
-
-    public function createAluno2($email){
-        
-        $sql = "SELECT * FROM alunos where email = '{$email}'";
-        $statement = $this->conexao->prepare($sql);
-        $statement->execute();
-        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $array;
-       
     }
     
     public function createAgendamento($id,$data){
@@ -164,11 +139,37 @@ class banco
             echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");
             window.location.href="/afungaz/index.php";</script>';
             } else {
-               echo '<script>alert("Erro no registro!");</script>;';
+               echo '<script>alert("Erro no registro!");</script>';
             }
     }
 
 
+    public function validaAgendamento($id,$data){
+
+        $sql = "SELECT * FROM agendamento where id_local = '$id' and data_agendamento = '$data'";
+        $statement = $this->conexao->prepare($sql);
+        $statement->execute();
+        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $statement->rowCount();
+
+        if($rows){
+            echo '<script>alert("Essa data já está reservada para este Quioesque");</script>';
+            
+        }   else{
+            $cpf = $_SESSION['cnpj_cpf']; 
+
+            $sql = "INSERT INTO agendamento VALUES (0,'$cpf','$data',$id,1)";
+            $statement = $this->conexao->prepare($sql);
+            $resultado = $statement->execute();
+            if ($resultado) {
+                echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");
+                window.location.href="/afungaz/index.php";</script>';
+                } else {
+                echo '<script>alert("Erro no registro!");</script>';
+                }
+        }
+
+    }
 
 }
 
