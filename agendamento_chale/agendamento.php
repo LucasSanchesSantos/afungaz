@@ -1,5 +1,8 @@
 <?php
     include 'classes/banco.class.php';
+    $object = new chale;
+
+    include '../class_login/banco.class.php';
     $obj = new banco;
     session_start();
     
@@ -8,12 +11,13 @@
     if(isset($_GET['logout'])){
         $obj->logout();
     }
+    
 
     if($_POST){
         if($_POST['local_origem'] == 0){
             echo '<script>alert("Selecione ao menos um Quiosque");</script>';
         }else{
-            $obj->validaAgendamento($_POST['local_origem'],$_POST['data_agendamento']); 
+            $object->validaAgendamento($_POST['local_origem'],$_POST['data_agendamento']); 
         }
     }
 
@@ -23,11 +27,9 @@
 <html lang="pt">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 
@@ -46,13 +48,8 @@
         </div>
     </header> 
 
-
-
     <div class="container d-flex align-items-center justify-content-between" id="title">
         <table class="table table-striped">
-            <!-- <div class="mt-5 d-flex justify-content-center ">
-                <h3 id="title2">Quiosques já agendados</h3> -->
-           
             <thead>
                 <tr>
                     <th scope="col" class="text-center">Número quiosques</th>
@@ -62,7 +59,7 @@
             </thead>    
             <tbody>
             <?php
-            $array = $obj->readQuioesque();
+            $array = $object->readQuioesque();
             foreach ($array as $key => $row) {
                 echo '<tr>';
                 echo '<th class="text-center">'. $row['local_origem'].'</th>';
@@ -80,7 +77,7 @@
                 <label>Número do quiosque</label>
                 <select required class="form-control" type="integer" name="local_origem">
                     <option value="0">Selecione</option>
-                    <?php $array = $obj->readLocal();
+                    <?php $array = $object->readLocal();
                     
                     foreach ($array as $key => $row) {
                         echo '<option value='.$row['id'].'>'.$row['local_origem'].'</option>';

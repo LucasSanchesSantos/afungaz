@@ -1,5 +1,5 @@
 <?php
-class banco
+class quadra
 {
     private $host = "localhost";
     private $database = "afungaz";
@@ -31,8 +31,9 @@ class banco
         left join local l on l.id = a.id_local  
         left join tipo_local t on t.id = l.id_tipo_local
 
-        where t.descricao = 'Quiosque'
+        where t.descricao = 'Campos'
         and a.id_situacao = 1
+        and a.data_agendamento >= CURDATE()
         order by a.data_agendamento, l.local_origem";
 
         //prepara o sql
@@ -53,7 +54,7 @@ class banco
         from local l
         left join tipo_local t on t.id = l.id_tipo_local
 
-        where t.descricao = 'Quiosque'
+        where t.descricao = 'Campos'
         order by 1
 
         ";
@@ -63,107 +64,26 @@ class banco
         $array = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $array;
     }
-    
-    
-    // public function update($id_session,$cpf,$nome,$telefone,$instituicao,$endereco,$rg,$email,$senha,$dias_semana,$id_tipo_usuario)
-    // {
-    //     $sql = "UPDATE alunos set id = $id_session,nome = '{$nome}',cpf = '{$cpf}',nome = '{$nome}',telefone = '{$telefone}',id_instituicao = $instituicao,id_tipo_usuario = $id_tipo_usuario,endereco = '{$endereco}',rg = '{$rg}',email = '{$email}',senha = '{$senha}',dias_semana = $dias_semana where id = $id_session" ;
 
-    //     $statement = $this->conexao->prepare($sql);
-    //     $update = $statement->execute();
-    //     if($update){
-    //         echo '<script> alert("Alterado com sucesso!");
-    //         window.location.href="/contador_de_dedinhos/index.php";</script>';
-    //     }else{
-    //         echo '<script>alert("Erro no registro!")</script>';
-    //     }
-    // }
+    public function validaAgendamento($id,$data,$hora){
 
-    public function delete($table, $id){
-        $sql = "delete from $table where id = $id";
-
-        
-        $statement = $this->conexao->prepare($sql);
-        $delete = $statement->execute();
-        if($delete){
-            echo '<script> alert("Registro excluído com sucesso!");
-            window.location.href="/contador_de_dedinhos";</script>';
-        }else{
-            echo '<script>alert("Erro na exclusão!")</script>';
-        }
-    }
-
-    public function sigin($cpf, $password)
-    {
-        $sql = "SELECT * FROM pessoa where cnpj_cpf = '$cpf' and chavemd5 = '$password'";
-        $statement = $this->conexao->prepare($sql);
-        $statement->execute();
-        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
-        $rows = $statement->rowCount();
-        //rowCount conta os resultados caso seja verdadeiro
-        //var_dump($rows);
-
-        if ($rows) {
-            foreach ($array as $key => $value) {
-                session_start();
-                $_SESSION["nome"] = $value['nome'];
-                $_SESSION["login"] = true;
-                $_SESSION["cnpj_cpf"] = $value['cnpj_cpf'];
-            }
-            header('location: index.php');
-            //funcao direcionar
-        }else{
-            echo '<script> alert("Login inválido!"); </script>';
-        }
-    }
-
-    public function checkLogin(){
-        if(!isset($_SESSION["login"]) or $_SESSION["login"] == false){
-            header('Location: login.php');
-        }
-    }
-    public function logout(){
-        session_destroy();//destruir todas sessões
-        $_SESSION['login'] = false;
-        header('Location: ../../../afungaz/login.php');
-    }
-    
-    public function createAgendamento($id,$data){
-
-        $cpf = $_SESSION['cnpj_cpf']; 
-
-        $sql = "INSERT INTO agendamento VALUES (0,'$cpf','$data',$id,1)";
-        $statement = $this->conexao->prepare($sql);
-        $resultado = $statement->execute();
-        if ($resultado) {
-            echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");
-            window.location.href="/afungaz/index.php";</script>';
-            } else {
-               echo '<script>alert("Erro no registro!");</script>';
-            }
-    }
-
-
-    public function validaAgendamento($id,$data){
-
-        $sql = "SELECT * FROM agendamento where id_local = '$id' and data_agendamento = '$data'";
+        $sql = "SELECT * FROM agendamento where id_local = '$id' and data_agendamento = '$data' and hora = '$hora'";
         $statement = $this->conexao->prepare($sql);
         $statement->execute();
         $array = $statement->fetchAll(PDO::FETCH_ASSOC);
         $rows = $statement->rowCount();
 
         if($rows){
-            echo '<script>alert("Essa data já está reservada para este Quioesque");</script>';
+            echo '<script>alert("Esse campo/quadra já esta registrado nesse horário");</script>';
             
         }   else{
             $cpf = $_SESSION['cnpj_cpf']; 
 
-            $sql = "INSERT INTO agendamento VALUES (0,'$cpf','$data',$id,1)";
+            $sql = "INSERT INTO agendamento VALUES (0,'$cpf','$data',$id,1,'$hora')";
             $statement = $this->conexao->prepare($sql);
             $resultado = $statement->execute();
             if ($resultado) {
-                echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");
-                window.location.href="/afungaz/index.php";</script>';
+                echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");window.location.href="/afungaz/agendamento_quadra/agendamento.php";</script>';
                 } else {
                 echo '<script>alert("Erro no registro!");</script>';
                 }

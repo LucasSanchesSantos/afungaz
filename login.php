@@ -1,5 +1,5 @@
 <?php
-    include 'pessoa/classes/banco.class.php';
+    include 'class_login/banco.class.php';
 
     if($_POST){
         $obj = new banco;
