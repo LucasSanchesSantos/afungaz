@@ -1,5 +1,5 @@
 <?php
-    include 'alunos/classes/banco.class.php';
+    include 'pessoa/classes/banco.class.php';
 
     if($_POST){
         $obj = new banco;
@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V2</title>
+	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="images/icons/LogoGazin.png"/>
