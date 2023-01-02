@@ -22,7 +22,7 @@ class quadra
         }
     }
 
-    public function readQuioesque()
+    public function readQuadra()
     {
         $sql = 
         "SELECT a.* 
@@ -65,7 +65,7 @@ class quadra
         return $array;
     }
 
-    public function validaAgendamento($id,$data,$hora){
+    public function Agendamento($id,$data,$hora){
 
         $sql = "SELECT * FROM agendamento where id_local = '$id' and data_agendamento = '$data' and hora = $hora";
         $statement = $this->conexao->prepare($sql);
@@ -88,9 +88,8 @@ class quadra
         }
     }
 
-    public function readQuioesqueFilter($local_origem_consulta,$data_agendamento_consulta_inicio,$data_agendamento_consulta_fim)
+    public function readQuadraFilter($local_origem_consulta,$data_agendamento_consulta_inicio,$data_agendamento_consulta_fim)
     {
-
         if($local_origem_consulta == 0){
             $var_aux = "";
         }else{

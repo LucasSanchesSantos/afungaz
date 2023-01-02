@@ -12,30 +12,29 @@
         $obj->logout();
     }
     
-    //or $_POST['hora'] 
     if($_POST){
         if(!isset($_POST['data_agendamento_consulta_inicio'])){
             if(!isset($_POST['local_origem'])){
-                $array_filter = $object->readQuioesque();
+                $array_filter = $object->readQuadra();
             }else{
                 if($_POST['local_origem'] == 0 or $_POST['hora'] == 0){
                     echo '<script>alert("Precisa selecionar pelomenos uma quadra e um horário!");</script>';
-                    $array_filter = $object->readQuioesque();
+                    $array_filter = $object->readQuadra();
                 }else{
-                    $object->validaAgendamento($_POST['local_origem'],$_POST['data_agendamento'],$_POST['hora']); 
-                    $array_filter = $object->readQuioesque();
+                    $object->Agendamento($_POST['local_origem'],$_POST['data_agendamento'],$_POST['hora']); 
+                    $array_filter = $object->readQuadra();
                 }
             }
         }else{
-            $array_filter = $object->readQuioesqueFilter($_POST['local_origem_consulta'],$_POST['data_agendamento_consulta_inicio'],$_POST['data_agendamento_consulta_fim']);
+            $array_filter = $object->readQuadraFilter($_POST['local_origem_consulta'],$_POST['data_agendamento_consulta_inicio'],$_POST['data_agendamento_consulta_fim']);
         }
     }else{
-        $array_filter = $object->readQuioesque();
+        $array_filter = $object->readQuadra();
     }
 
-    var_dump($_POST['local_origem_consulta']);
-    var_dump($_POST['data_agendamento_consulta']);
-    var_dump($array_filter);
+    // var_dump($_POST['local_origem_consulta']);
+    // var_dump($_POST['data_agendamento_consulta']);
+    // var_dump($array_filter);
 ?>
 
 <!doctype html>
