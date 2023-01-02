@@ -1,5 +1,5 @@
 <?php
-class chale
+class quioesque
 {
     private $host = "localhost";
     private $database = "afungaz";
@@ -22,29 +22,6 @@ class chale
         }
     }
 
-    public function readQuioesque()
-    {
-        $sql = 
-        "SELECT a.* 
-            ,l.local_origem
-        from agendamento a
-        left join local l on l.id = a.id_local  
-        left join tipo_local t on t.id = l.id_tipo_local
-
-        where t.descricao = 'Quiosque'
-        and a.id_situacao = 1
-        and a.data_agendamento >= CURDATE()
-        order by a.data_agendamento, l.local_origem";
-
-        //prepara o sql
-        $statement = $this->conexao->prepare($sql);
-        //executa
-        $statement->execute();
-        //tras um array completo do sql
-        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $array;
-    }
-
     public function readLocal()
     {
         $sql = 
@@ -54,7 +31,7 @@ class chale
         from local l
         left join tipo_local t on t.id = l.id_tipo_local
 
-        where t.descricao = 'Quiosque'
+        where t.descricao = 'Chalé'
         order by 1
 
         ";
@@ -65,12 +42,12 @@ class chale
         return $array;
     }
 
-    public function validaAgendamento($id,$data){
+    public function Agendamento($id,$data){
 
         $sql = "SELECT * FROM agendamento where id_local = '$id' and data_agendamento = '$data'";
         $statement = $this->conexao->prepare($sql);
         $statement->execute();
-        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        //$array = $statement->fetchAll(PDO::FETCH_ASSOC);
         $rows = $statement->rowCount();
 
         if($rows){
@@ -79,7 +56,7 @@ class chale
         }   else{
             $cpf = $_SESSION['cnpj_cpf']; 
 
-            $sql = "INSERT INTO agendamento VALUES (0,'$cpf','$data',$id,1,'00:00:00')";
+            $sql = "INSERT INTO agendamento VALUES (0,'$cpf','$data',$id,1,0)";
             $statement = $this->conexao->prepare($sql);
             $resultado = $statement->execute();
             if ($resultado) {
@@ -89,6 +66,55 @@ class chale
                 echo '<script>alert("Erro no registro!");</script>';
                 }
         }
+
     }
+
+    public function readChale()
+    {
+        $sql = 
+        "SELECT a.* 
+            ,l.local_origem
+        from agendamento a
+        left join local l on l.id = a.id_local  
+        left join tipo_local t on t.id = l.id_tipo_local
+
+        where t.descricao = 'Chalé'
+        and a.id_situacao = 1
+        and a.data_agendamento >= CURDATE()
+        order by a.data_agendamento, l.local_origem";
+
+        $statement = $this->conexao->prepare($sql);
+        $statement->execute();
+        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $array;
+    }
+
+    public function readChaleFilter($local_origem_consulta,$data_agendamento_consulta_inicio,$data_agendamento_consulta_fim)
+    {
+        if($local_origem_consulta == 0){
+            $var_aux = "";
+        }else{
+            $var_aux = "and a.id_local = $local_origem_consulta";
+        }
+
+        $sql = 
+        "SELECT a.* 
+            ,l.local_origem
+        from agendamento a
+        left join local l on l.id = a.id_local  
+        left join tipo_local t on t.id = l.id_tipo_local
+
+        where a.id_situacao = 1
+        and t.descricao = 'Chalé'
+        $var_aux
+        and a.data_agendamento between '$data_agendamento_consulta_inicio' and '$data_agendamento_consulta_fim'
+        order by a.data_agendamento, l.local_origem";
+
+        $statement = $this->conexao->prepare($sql);
+        $statement->execute();
+        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $array;
+    }
+
 }
 

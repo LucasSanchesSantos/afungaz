@@ -22,29 +22,6 @@ class quioesque
         }
     }
 
-    public function readQuioesque()
-    {
-        $sql = 
-        "SELECT a.* 
-            ,l.local_origem
-        from agendamento a
-        left join local l on l.id = a.id_local  
-        left join tipo_local t on t.id = l.id_tipo_local
-
-        where t.descricao = 'Quiosque'
-        and a.id_situacao = 1
-        and a.data_agendamento >= CURDATE()
-        order by a.data_agendamento, l.local_origem";
-
-        //prepara o sql
-        $statement = $this->conexao->prepare($sql);
-        //executa
-        $statement->execute();
-        //tras um array completo do sql
-        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $array;
-    }
-
     public function readLocal()
     {
         $sql = 
@@ -65,7 +42,7 @@ class quioesque
         return $array;
     }
 
-    public function validaAgendamento($id,$data){
+    public function Agendamento($id,$data){
 
         $sql = "SELECT * FROM agendamento where id_local = '$id' and data_agendamento = '$data'";
         $statement = $this->conexao->prepare($sql);
@@ -90,6 +67,54 @@ class quioesque
                 }
         }
 
+    }
+
+    public function readQuioesque()
+    {
+        $sql = 
+        "SELECT a.* 
+            ,l.local_origem
+        from agendamento a
+        left join local l on l.id = a.id_local  
+        left join tipo_local t on t.id = l.id_tipo_local
+
+        where t.descricao = 'Quiosque'
+        and a.id_situacao = 1
+        and a.data_agendamento >= CURDATE()
+        order by a.data_agendamento, l.local_origem";
+
+        $statement = $this->conexao->prepare($sql);
+        $statement->execute();
+        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $array;
+    }
+
+    public function readQuioesqueFilter($local_origem_consulta,$data_agendamento_consulta_inicio,$data_agendamento_consulta_fim)
+    {
+
+        if($local_origem_consulta == 0){
+            $var_aux = "";
+        }else{
+            $var_aux = "and a.id_local = $local_origem_consulta";
+        }
+
+        $sql = 
+        "SELECT a.* 
+            ,l.local_origem
+        from agendamento a
+        left join local l on l.id = a.id_local  
+        left join tipo_local t on t.id = l.id_tipo_local
+
+        where a.id_situacao = 1
+        and t.descricao = 'Quiosque'
+        $var_aux
+        and a.data_agendamento between '$data_agendamento_consulta_inicio' and '$data_agendamento_consulta_fim'
+        order by a.data_agendamento, l.local_origem";
+
+        $statement = $this->conexao->prepare($sql);
+        $statement->execute();
+        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $array;
     }
 
 }
