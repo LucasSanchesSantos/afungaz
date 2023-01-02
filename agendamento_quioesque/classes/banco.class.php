@@ -70,7 +70,7 @@ class quioesque
         $sql = "SELECT * FROM agendamento where id_local = '$id' and data_agendamento = '$data'";
         $statement = $this->conexao->prepare($sql);
         $statement->execute();
-        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        //$array = $statement->fetchAll(PDO::FETCH_ASSOC);
         $rows = $statement->rowCount();
 
         if($rows){
@@ -79,7 +79,7 @@ class quioesque
         }   else{
             $cpf = $_SESSION['cnpj_cpf']; 
 
-            $sql = "INSERT INTO agendamento VALUES (0,'$cpf','$data',$id,1,'00:00:00')";
+            $sql = "INSERT INTO agendamento VALUES (0,'$cpf','$data',$id,1,0)";
             $statement = $this->conexao->prepare($sql);
             $resultado = $statement->execute();
             if ($resultado) {
