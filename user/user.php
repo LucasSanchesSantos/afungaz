@@ -1,8 +1,8 @@
 <?php
     include 'classes/banco.class.php';
-    $object = new quadra;
+    $object = new user;
 
-    include '../class_login/banco.class.php';
+    include '../class_start/banco.class.login.php';
     $obj = new banco;
     session_start();
     
@@ -26,9 +26,6 @@
         $array_filter = $object->readUser();
     }
 
-    // var_dump($_POST['local_origem_consulta']);
-    // var_dump($_POST['data_agendamento_consulta']);
-    // var_dump($array_filter);
 ?>
 
 <!doctype html>

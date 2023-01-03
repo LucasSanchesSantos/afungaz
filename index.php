@@ -1,6 +1,5 @@
 <?php
-    include 'class_login/banco.class.php';
-
+    include 'class_start/banco.class.login.php';
 
     $obj = new banco;
     session_start();
@@ -11,6 +10,8 @@
     if(isset($_GET['logout'])){
         $obj->logout();
     }
+
+    
 
 ?>
 
@@ -45,6 +46,8 @@
     <a href="agendamento_chale/agendamento.php">Agendar Chalé</a><br>
     <a href="agendamento_quadra/agendamento.php">Agendar Campos</a><br>
     <a href="user/user.php">Meus agendamentos</a><br>
+    <a href="user/update.php">Manutenção de cadastro</a><br>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
