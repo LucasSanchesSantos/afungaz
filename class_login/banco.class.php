@@ -29,18 +29,29 @@ class banco
         $statement->execute();
         $array = $statement->fetchAll(PDO::FETCH_ASSOC);
         $rows = $statement->rowCount();
-        //rowCount conta os resultados caso seja verdadeiro
-        //var_dump($rows);
-
+        
         if ($rows) {
             foreach ($array as $key => $value) {
                 session_start();
                 $_SESSION["nome"] = $value['nome'];
                 $_SESSION["login"] = true;
                 $_SESSION["cnpj_cpf"] = $value['cnpj_cpf'];
+                $_SESSION["password"] = $value['chavemd5'];
             }
-            header('location: index.php');
-            //funcao direcionar
+            
+            $sql = "SELECT * FROM cadastro_afungaz where cnpj_cpf = '$cpf'";
+            $statement = $this->conexao->prepare($sql);
+            $statement->execute();
+            $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $rows2 = $statement->rowCount();
+            
+            if ($rows2) {
+                header('location: index.php');
+                $_SESSION['cadastro_afungaz'] = true;
+            }else{
+                header('location: primeiro_cadastro.php');
+            }
+        
         }else{
             echo '<script> alert("Login inválido!"); </script>';
         }
@@ -48,12 +59,20 @@ class banco
 
     public function checkLogin(){
         if(!isset($_SESSION["login"]) or $_SESSION["login"] == false){
-            header('Location: login.php');
+            header('location: primeiro_cadastro.php');
         }
     }
+
+    public function checkCadastroAfungaz(){
+        if(!isset($_SESSION["cadastro_afungaz"]) or $_SESSION["cadastro_afungaz"] == false){
+            header('Location: primeiro_cadastro.php');
+        }
+    }
+
     public function logout(){
         session_destroy();//destruir todas sessões
         $_SESSION['login'] = false;
+        $_SESSION['cadastro_afungaz'] = false;
         header('Location: ../../../afungaz/login.php');
     }
 }
