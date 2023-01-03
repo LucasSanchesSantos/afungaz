@@ -1,6 +1,6 @@
 <?php
     include 'classes/banco.class.php';
-    $object = new quioesque;
+    $object = new quadra;
 
     include '../class_login/banco.class.php';
     $obj = new banco;
@@ -14,29 +14,21 @@
     
     if($_POST){
         if(!isset($_POST['data_agendamento_consulta_inicio'])){
-            if(!isset($_POST['local_origem'])){
-                $array_filter = $object->readChale();
+            if(!isset($_POST['cancel'])){
+                $array_filter = $object->readUser();
             }else{
-                if($_POST['local_origem'] == 0){
-                    echo '<script>alert("Precisa selecionar pelomenos uma quadra e um horário!");</script>';
-                    $array_filter = $object->readChale();
-                }else{
-                    $object->Agendamento($_POST['local_origem'],$_POST['data_agendamento']); 
-                    $array_filter = $object->readChale();
-                }
+                $object->updateCancel($_POST['cancel'],$_SESSION['cnpj_cpf']);
             }
         }else{
-            $array_filter = $object->readChaleFilter($_POST['local_origem_consulta'],$_POST['data_agendamento_consulta_inicio'],$_POST['data_agendamento_consulta_fim']);
+            $array_filter = $object->readUserFilter($_POST['local_origem_consulta'],$_POST['data_agendamento_consulta_inicio'],$_POST['data_agendamento_consulta_fim']);
         }
     }else{
-        $array_filter = $object->readChale();
+        $array_filter = $object->readUser();
     }
 
     // var_dump($_POST['local_origem_consulta']);
-    // var_dump($_POST['data_agendamento_consulta_inicio']);
-    // var_dump($_POST['data_agendamento_consulta_fim']);
-    //var_dump($array_filter);
-    //echo $array_filter['id_local'];
+    // var_dump($_POST['data_agendamento_consulta']);
+    // var_dump($array_filter);
 ?>
 
 <!doctype html>
@@ -53,10 +45,9 @@
 </head>
 
 <body>
-    
     <header class="d-flex">
         <div class="container d-flex align-items-center justify-content-between" id="title">
-            <a href="../index.php"><h1>Home</h1></a>
+            <a href="../index.php"><h1>Afungaz</h1></a>
             <div class="welcome">
                 Bem vindo, <?php echo $_SESSION['nome'] ?>.
                 <a href="?logout" class="text-white"> Sair </a>
@@ -111,57 +102,39 @@
         </form>
     </div>    
 
-    <div class="container d-flex align-items-center justify-content-between" id="title">
+    <div class="container d-flex align-items-center justify-content-between" id="title"> 
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center">Chalé</th>
+                    <th scope="col" class="text-center">Local Agenda</th>
                     <th scope="col" class="text-center">Data</th>
+                    <th scope="col" class="text-center">Hora</th>
                     <th scope="col" class="text-center">Situação</th>
+                    <th scope="col" class="text-center">Cancelar</th>
                 </tr>
             </thead>    
             <tbody>
             <?php
-            
-            foreach ($array_filter as $key => $row) {
-                echo '<tr>';
-                echo '<th class="text-center">'. $row['local_origem'].'</th>';
-                echo '<th class="text-center">'. $row['data_agendamento'].'</th>';
-                echo '<th class="text-center">Agendado</th>';
 
-            }  
-                ?>
+                foreach ($array_filter as $key => $row) {
+                    echo '<tr>';
+                    echo '<th class="text-center">'. $row['local_origem'].'</th>';
+                    echo '<th class="text-center">'. $row['data_agendamento'].'</th>';
+                    echo '<th class="text-center">'. $row['hora'].'</th>';
+                    echo '<th class="text-center">Agendado</th>';
+                    echo '<td width=250>';
+                    echo '<form action="" method="POST">';       
+                    echo '<input type="submit" id=cancel name="cancel" class="btn bg-transparent" style="width:100;height:100" value="'.$row['id'].'"'."teste".' </input>';     
+                    echo '</form>';
+                    echo '</td>';
+                }
+              
+            ?>
+
             </tbody>
-        </table>
+        </table>              
+
     </div>
-
-    <div class="mt-3 d-flex justify-content-center p-2">
-            <form action="" method="POST">
-            <div class="form-group ">
-                <label>Chalé</label>
-                <select required class="form-control" type="integer" name="local_origem">
-                    <option value="0">Selecione</option>
-                    <?php $array = $object->readLocal();
-                    
-                    foreach ($array as $key => $row) {
-                        echo '<option value='.$row['id'].'>'.$row['local_origem'].'</option>';
-                    }
-                    ?>
-                </select>
-            </div>
-
-            <div class="form-group btn">
-                <label>Data inicio</label>
-                <input type="date" required  class="form-control" min="<?php echo date('Y-m-d')?>"
-                name="data_agendamento" value="<?php $date = date('Y-m-d'); echo $date;?>">
-            </div>
-
-            <button type="submit" class="btn btn-primary " >
-                Agendar
-            </button>
-
-            </form>
-        </div>                   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

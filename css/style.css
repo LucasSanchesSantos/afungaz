@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+@import url('https://fonts.cdnfonts.com/css/invisible');
 
 
 header{
@@ -60,26 +61,6 @@ footer{
     }
 }
 
-#numero_total{
-    text-align: center;
-    font-family: 'Bebas Neue', cursive;
-    color: #04003e;
-    font-size: 45px;
-}
-
-#span3{
-    color: #04003e;
-}
-
-#recado{
-    font-family: 'Edu SA Beginner', cursive;
-}
-
-#recadotitle{
-    font-family: 'Edu SA Beginner', cursive;
-    color: #0091ff;
-}
-
 #title{
     font-family: 'Ubuntu', sans-serif;
 }
@@ -102,4 +83,15 @@ a{
     color: #0cb300;
     font-family: 'Open Sans', sans-serif;
 
+}
+
+#cancel{
+    background-image: url(../images/cancel2.png);
+    font-family: 'invisible';
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 5.0em;
+    padding-left: 5.0em;
+    max-width: 100px; 
+    max-height: 100px;
 }

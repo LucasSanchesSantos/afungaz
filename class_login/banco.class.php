@@ -1,10 +1,10 @@
 <?php
 class banco
 {
-    private $host = "localhost";
+    private $host = "afungaz.mysql.dbaas.com.br";
     private $database = "afungaz";
-    private $user = "root";
-    private $password = "";
+    private $user = "afungaz";
+    private $password = "Informatica@10";
     private $conexao = null;
 
     public function __construct()
@@ -21,20 +21,6 @@ class banco
             com o banco de dados: Erro" . $e->getCode();
         }
     }
- 
-    // public function update($id_session,$cpf,$nome,$telefone,$instituicao,$endereco,$rg,$email,$senha,$dias_semana,$id_tipo_usuario)
-    // {
-    //     $sql = "UPDATE alunos set id = $id_session,nome = '{$nome}',cpf = '{$cpf}',nome = '{$nome}',telefone = '{$telefone}',id_instituicao = $instituicao,id_tipo_usuario = $id_tipo_usuario,endereco = '{$endereco}',rg = '{$rg}',email = '{$email}',senha = '{$senha}',dias_semana = $dias_semana where id = $id_session" ;
-
-    //     $statement = $this->conexao->prepare($sql);
-    //     $update = $statement->execute();
-    //     if($update){
-    //         echo '<script> alert("Alterado com sucesso!");
-    //         window.location.href="/contador_de_dedinhos/index.php";</script>';
-    //     }else{
-    //         echo '<script>alert("Erro no registro!")</script>';
-    //     }
-    // }
     
     public function sigin($cpf, $password)
     {
