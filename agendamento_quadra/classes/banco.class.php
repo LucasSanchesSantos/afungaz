@@ -1,11 +1,12 @@
 <?php
 class quadra
 {
-    private $host = "localhost";
+    private $host = "afungaz.mysql.dbaas.com.br";
     private $database = "afungaz";
-    private $user = "root";
-    private $password = "";
+    private $user = "afungaz";
+    private $password = "Informatica@10";
     private $conexao = null;
+
 
     public function __construct()
     {
@@ -67,7 +68,7 @@ class quadra
 
     public function Agendamento($id,$data,$hora){
 
-        $sql = "SELECT * FROM agendamento where id_local = '$id' and data_agendamento = '$data' and hora = $hora";
+        $sql = "SELECT * FROM agendamento where id_local = '$id' and data_agendamento = '$data' and hora = $hora and id_situacao = 1";
         $statement = $this->conexao->prepare($sql);
         $statement->execute();
         $rows = $statement->rowCount();
@@ -81,7 +82,7 @@ class quadra
             $statement = $this->conexao->prepare($sql);
             $resultado = $statement->execute();
             if ($resultado) {
-                echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");window.location.href="/afungaz/agendamento_quadra/agendamento.php";</script>';
+                echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");window.location.href="/afungaz/index.php";</script>';
                 } else {
                 echo '<script>alert("Erro no registro!");</script>';
                 }

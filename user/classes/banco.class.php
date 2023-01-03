@@ -1,5 +1,5 @@
 <?php
-class quioesque
+class quadra
 {
     private $host = "afungaz.mysql.dbaas.com.br";
     private $database = "afungaz";
@@ -32,7 +32,6 @@ class quioesque
         from local l
         left join tipo_local t on t.id = l.id_tipo_local
 
-        where t.id = 2
         order by 1
 
         ";
@@ -43,54 +42,39 @@ class quioesque
         return $array;
     }
 
-    public function Agendamento($id,$data){
-
-        $sql = "SELECT * FROM agendamento where id_local = '$id' and data_agendamento = '$data' and id_situacao = 1";
-        $statement = $this->conexao->prepare($sql);
-        $statement->execute();
-        $rows = $statement->rowCount();
-
-        if($rows){
-            echo '<script>alert("Essa data já está reservada para este Quioesque");</script>';
-            
-        }   else{
-            $cpf = $_SESSION['cnpj_cpf']; 
-
-            $sql = "INSERT INTO agendamento VALUES (0,'$cpf','$data',$id,1,0)";
-            $statement = $this->conexao->prepare($sql);
-            $resultado = $statement->execute();
-            if ($resultado) {
-                echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");
-                window.location.href="/afungaz/index.php";</script>';
-                } else {
-                echo '<script>alert("Erro no registro!");</script>';
-                }
-        }
-
-    }
-
-    public function readChale()
+    public function readUser()
     {
+        $var_aux = $_SESSION['cnpj_cpf'];
+
         $sql = 
-        "SELECT a.* 
+        "SELECT 
+            a.id
+            ,a.data_agendamento
+            ,case when a.hora = 0 then 'Período inegral' else CONCAT(a.hora,':00') end as hora
             ,l.local_origem
         from agendamento a
         left join local l on l.id = a.id_local  
         left join tipo_local t on t.id = l.id_tipo_local
 
-        where t.id = 2
+        where a.id 
         and a.id_situacao = 1
         and a.data_agendamento >= CURDATE()
-        order by a.data_agendamento, l.local_origem";
+        and a.cnpj_cpf = '$var_aux'
+        order by l.local_origem, a.data_agendamento";
 
+        //prepara o sql
         $statement = $this->conexao->prepare($sql);
+        //executa
         $statement->execute();
+        //tras um array completo do sql
         $array = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $array;
     }
 
-    public function readChaleFilter($local_origem_consulta,$data_agendamento_consulta_inicio,$data_agendamento_consulta_fim)
+    public function readUserFilter($local_origem_consulta,$data_agendamento_consulta_inicio,$data_agendamento_consulta_fim)
     {
+        $var_aux2 = $_SESSION['cnpj_cpf'];
+
         if($local_origem_consulta == 0){
             $var_aux = "";
         }else{
@@ -98,17 +82,20 @@ class quioesque
         }
 
         $sql = 
-        "SELECT a.* 
+        "SELECT 
+            a.id
+            ,a.data_agendamento
+            ,case when a.hora = 0 then 'Período inegral' else CONCAT(a.hora,':00') end as hora
             ,l.local_origem
         from agendamento a
         left join local l on l.id = a.id_local  
         left join tipo_local t on t.id = l.id_tipo_local
 
         where a.id_situacao = 1
-        and t.id = 2
+        and a.cnpj_cpf = '$var_aux2'
         $var_aux
         and a.data_agendamento between '$data_agendamento_consulta_inicio' and '$data_agendamento_consulta_fim'
-        order by a.data_agendamento, l.local_origem";
+        order by l.local_origem, a.data_agendamento";
 
         $statement = $this->conexao->prepare($sql);
         $statement->execute();
@@ -116,5 +103,22 @@ class quioesque
         return $array;
     }
 
+    public function updateCancel($id,$cnpj_cpf){
+        $sql = "UPDATE agendamento set id_situacao = 3 where id = $id" ;
+        $statement = $this->conexao->prepare($sql);
+        $update = $statement->execute();
+
+        $sql = "INSERT INTO cancela_agendamento VALUES ($id,'$cnpj_cpf ',CURRENT_TIMESTAMP())" ;
+        $statement = $this->conexao->prepare($sql);
+        $update = $statement->execute();
+
+        if($update){
+            echo '<script> alert("Alterado com sucesso!");
+            window.location.href="/afungaz/user/user.php";</script>';
+        }else{
+            echo '<script>alert("Erro ao alterar. Contate um administrador")</script>';
+        }
+    }
+    
 }
 

@@ -3,9 +3,7 @@
 
     if($_POST){
         $obj = new banco;
-    	$cpf = $_POST['cnpj_cpf'];
-    	$password = $_POST['password'];
-    	$obj->sigin($cpf, $password);
+    	$obj->sigin($_POST['cnpj_cpf'],$_POST['password']);
     }
 ?>
 

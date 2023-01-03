@@ -1,11 +1,12 @@
 <?php
 class quioesque
 {
-    private $host = "localhost";
+    private $host = "afungaz.mysql.dbaas.com.br";
     private $database = "afungaz";
-    private $user = "root";
-    private $password = "";
+    private $user = "afungaz";
+    private $password = "Informatica@10";
     private $conexao = null;
+
 
     public function __construct()
     {
@@ -44,7 +45,7 @@ class quioesque
 
     public function Agendamento($id,$data){
 
-        $sql = "SELECT * FROM agendamento where id_local = '$id' and data_agendamento = '$data'";
+        $sql = "SELECT * FROM agendamento where id_local = '$id' and data_agendamento = '$data' and id_situacao = 1";
         $statement = $this->conexao->prepare($sql);
         $statement->execute();
         //$array = $statement->fetchAll(PDO::FETCH_ASSOC);
