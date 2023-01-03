@@ -2,7 +2,7 @@
     include 'classes/banco.class.php';
     $object = new quadra;
 
-    include '../class_login/banco.class.php';
+    include '../class_start/banco.class.login.php';
     $obj = new banco;
     session_start();
     

@@ -1,5 +1,5 @@
 <?php
-class quadra
+class user
 {
     private $host = "afungaz.mysql.dbaas.com.br";
     private $database = "afungaz";
@@ -119,6 +119,8 @@ class quadra
             echo '<script>alert("Erro ao alterar. Contate um administrador")</script>';
         }
     }
+
+    
     
 }
 

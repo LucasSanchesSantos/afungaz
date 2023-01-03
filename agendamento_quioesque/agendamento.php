@@ -2,7 +2,8 @@
     include 'classes/banco.class.php';
     $object = new quioesque;
 
-    include '../class_login/banco.class.php';
+    include '../class_start/banco.class.login.php';
+
     $obj = new banco;
     session_start();
     

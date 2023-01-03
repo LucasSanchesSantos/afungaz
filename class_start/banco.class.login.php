@@ -59,13 +59,15 @@ class banco
 
     public function checkLogin(){
         if(!isset($_SESSION["login"]) or $_SESSION["login"] == false){
-            header('location: primeiro_cadastro.php');
+            header('location: login.php');
         }
     }
 
     public function checkCadastroAfungaz(){
         if(!isset($_SESSION["cadastro_afungaz"]) or $_SESSION["cadastro_afungaz"] == false){
             header('Location: primeiro_cadastro.php');
+        }else{
+            
         }
     }
 
@@ -75,5 +77,6 @@ class banco
         $_SESSION['cadastro_afungaz'] = false;
         header('Location: ../../../afungaz/login.php');
     }
+    
 }
 
