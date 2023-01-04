@@ -1,0 +1,57 @@
+thead{
+    background-color:#4e73df;
+    color: white;
+}
+
+.bg-dark-blue{
+    background-color:#4e73df
+}
+
+.text-dark-blue{
+    color:#4e73df
+}
+
+.btn-dark-blue{
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #4e73df;
+    --bs-btn-border-color: #0d6efd;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #0b5ed7;
+    --bs-btn-hover-border-color: #0a58ca;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #0a58ca;
+    --bs-btn-active-border-color: #0a53be;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #0d6efd;
+    --bs-btn-disabled-border-color: #0d6efd;
+    max-width: 150px;
+}
+
+.div-content{
+    padding: 3rem;
+    margin: 2.5rem;
+}
+
+@media(max-width: 580px) {
+    .btn-dark-blue{        
+        max-width: none;       
+    }
+}
+
+@media(max-width: 970px) {
+    .div-content{
+        padding: 1rem;
+        margin: 1rem;
+    }
+}
+
+td {
+    font-size: 16px !important;
+}
+
+.pagination li {
+    padding: 10px;
+    border: 1px solid grey;
+}
