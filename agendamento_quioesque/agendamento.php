@@ -33,18 +33,13 @@
         $array_filter = $object->readQuioesque();
     }
 
-    // var_dump($_POST['local_origem_consulta']);
-    // var_dump($_POST['data_agendamento_consulta_inicio']);
-    // var_dump($_POST['data_agendamento_consulta_fim']);
-    //var_dump($array_filter);
-    //echo $array_filter['id_local'];
     include '../components/head.php';
 ?>
     <div class="mt-3 d-flex justify-content-center p-2">
         <form action="" method="POST">
         <div class="form-group ">
-            <label>Campo</label>
-            <select required class="form-control" type="number" name="local_origem_consulta">
+            <label>Quioesque</label>
+            <select class="form-control" type="number" name="local_origem_consulta">
                 <option value="0">Selecione</option>
                 <?php $array = $object->readLocal();
                 
@@ -57,7 +52,7 @@
 
         <div class="form-group btn">
             <label>De</label>
-            <input type="date" required  class="form-control" min="<?php echo date('Y-m-d')?>"
+            <input type="date" class="form-control" min="<?php echo date('Y-m-d')?>"
             name="data_agendamento_consulta_inicio" 
             value="<?php 
                         if(!isset($_POST['data_agendamento_consulta_inicio'])){
@@ -69,7 +64,7 @@
 
         <div class="form-group btn">
             <label>Até</label>
-            <input type="date" required  class="form-control" min="<?php echo date('Y-m-d')?>"
+            <input type="date" class="form-control" min="<?php echo date('Y-m-d')?>"
             name="data_agendamento_consulta_fim" 
             value="<?php 
                         if(!isset($_POST['data_agendamento_consulta_fim'])){

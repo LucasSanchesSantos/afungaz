@@ -104,7 +104,7 @@ class user
     }
 
     public function updateCancel($id,$cnpj_cpf){
-        $sql = "UPDATE agendamento set id_situacao = 3 where id = $id" ;
+        $sql = "UPDATE agendamento set id_situacao = 2 where id = $id" ;
         $statement = $this->conexao->prepare($sql);
         $update = $statement->execute();
 

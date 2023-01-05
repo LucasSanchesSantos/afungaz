@@ -24,7 +24,15 @@ class banco
     
     public function sigin($cpf, $password)
     {
-        $sql = "SELECT * FROM pessoa where cnpj_cpf = '$cpf' and chavemd5 = '$password'";
+        $sql = 
+        "SELECT 
+            p.*
+            ,c.*
+        FROM pessoa p 
+        left join cadastro_afungaz c on c.cnpj_cpf = p.cnpj_cpf
+        where p.cnpj_cpf = '$cpf' 
+            and p.chavemd5 = '$password'
+        ";
         $statement = $this->conexao->prepare($sql);
         $statement->execute();
         $array = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -37,6 +45,7 @@ class banco
                 $_SESSION["login"] = true;
                 $_SESSION["cnpj_cpf"] = $value['cnpj_cpf'];
                 $_SESSION["password"] = $value['chavemd5'];
+                $_SESSION['id_tipo_funcionario'] = $value['id_tipo_funcionario'];
             }
             
             $sql = "SELECT * FROM cadastro_afungaz where cnpj_cpf = '$cpf'";

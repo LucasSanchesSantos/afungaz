@@ -1,10 +1,11 @@
 <?php
     $config = include("{$_SERVER['DOCUMENT_ROOT']}/afungaz/config.php");
     $uri = $_SERVER['REQUEST_URI'];
+    date_default_timezone_set('America/Sao_Paulo');
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
 
@@ -70,6 +71,14 @@
                         <li class="nav-item">
                             <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/user/update.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>user/update.php"><i class="bi bi-person-fill me-2"></i>Manutenção de Cadastro</a>
                         </li>
+                        <?php if($_SESSION['id_tipo_funcionario'] == 2){?>
+                        <li class="nav-item">
+                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/admin/read_agendamento.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>admin/read_agendamento.php"><i class="bi bi-person-fill me-2"></i>Relatório de agendametnos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/admin/read_funcionario.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>admin/read_funcionario.php"><i class="bi bi-person-fill me-2"></i>Relatório de funcionários</a>
+                        </li>
+                        <?php }?>
                     </ul>
                 </div>
             </div>

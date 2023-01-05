@@ -31,18 +31,13 @@
     }else{
         $array_filter = $object->readChale();
     }
-
-    // var_dump($_POST['local_origem_consulta']);
-    // var_dump($_POST['data_agendamento_consulta_inicio']);
-    // var_dump($_POST['data_agendamento_consulta_fim']);
-    //var_dump($array_filter);
-    //echo $array_filter['id_local'];
+    
     include '../components/head.php';
 ?>  
     <div class="mt-3 d-flex justify-content-center p-2">
         <form action="" method="POST">
         <div class="form-group ">
-            <label>Campo</label>
+            <label>Chalé</label>
             <select required class="form-control" type="number" name="local_origem_consulta">
                 <option value="0">Selecione</option>
                 <?php $array = $object->readLocal();
