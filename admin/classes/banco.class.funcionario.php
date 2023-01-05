@@ -192,7 +192,7 @@ class funcionario
     }
 
     public function updateFuncionario($cnpj_cpf,$id_situacao,$id_tipo_funcionario){
-        $sql = "UPDATE cadastro_afungaz set id_situacao = $id_situacao where id_tipo_funcionario = $id_tipo_funcionario" ;
+        $sql = "UPDATE cadastro_afungaz set id_situacao = $id_situacao, id_tipo_funcionario = $id_tipo_funcionario where cnpj_cpf = '$cnpj_cpf'" ;
         $statement = $this->conexao->prepare($sql);
         $update = $statement->execute();
 

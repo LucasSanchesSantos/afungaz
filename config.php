@@ -1,4 +1,4 @@
 <?php 
     return [
-        'URL' => 'http://localhost:8000/afungaz/' 
+        'URL' => 'http://localhost:8000/afungaz/'
     ];

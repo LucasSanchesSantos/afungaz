@@ -87,6 +87,7 @@
                     <th scope="col" class="text-center">Ramal</th>
                     <th scope="col" class="text-center">Telefone</th>
                     <th scope="col" class="text-center">Situação</th>
+                    <th scope="col" class="text-center">Tipo Funcionário</th>
                     <th scope="col" class="text-center">Negócio</th>
                     <th scope="col" class="text-center">Cargo</th>
                     <th scope="col" class="text-center">Editar</th>
@@ -100,6 +101,7 @@
                     echo '<th class="text-center">'. $row['ramal'].'</th>';
                     echo '<th class="text-center">'. $row['telefone'].'</th>';
                     echo '<th class="text-center">'. $row['situacao'].'</th>';
+                    echo '<th class="text-center">'. $row['tipo_funcionario'].'</th>';
                     echo '<th class="text-center">'. $row['negocio'].'</th>';
                     echo '<th class="text-center">'. $row['cargo'].'</th>';
                     echo '<td width=90>';
