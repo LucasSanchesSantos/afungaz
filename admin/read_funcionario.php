@@ -1,4 +1,6 @@
 <?php
+    $config = include("{$_SERVER['DOCUMENT_ROOT']}/afungaz/config.php");
+    
     include 'classes/banco.class.funcionario.php';
     $object = new funcionario;
 
@@ -11,7 +13,7 @@
     }
 
     if($_SESSION['id_tipo_funcionario'] <> 2){
-        header('location:http://localhost/afungaz');
+        header('location:'.$config['URL']);
     }
 
     $array_filter = $object->readFuncionario();
@@ -99,7 +101,9 @@
                     echo '<th class="text-center">'. $row['telefone'].'</th>';
                     echo '<th class="text-center">'. $row['situacao'].'</th>';
                     echo '<th class="text-center">'. $row['negocio'].'</th>';
-                    echo '<th class="text-center">'. $row['cargo'].'</th>';                
+                    echo '<th class="text-center">'. $row['cargo'].'</th>';
+                    echo '<td width=90>';
+                    echo ' <a class="btn btn-warning" href="/afungaz/admin/update_funcionario.php?cnpj_cpf='.$row['cnpj_cpf'].'">Editar</a>';             
                 }
             ?>
             </tbody>

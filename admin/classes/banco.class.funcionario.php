@@ -52,6 +52,36 @@ class funcionario
         $array = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $array;
     }
+    
+    public function selectSituacaoFilter($id_ignore)
+    {
+        $sql = 
+        "SELECT 
+            *
+        from situacao_funcionario s
+        where id <> $id_ignore
+        order by descricao
+        ";
+        $statement = $this->conexao->prepare($sql);
+        $statement->execute();
+        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $array;
+    }
+
+    public function selectTipoFuncionario($id_ignore)
+    {
+        $sql = 
+        "SELECT 
+            *
+        from tipo_funcionario t
+        where id <> $id_ignore
+        order by descricao
+        ";
+        $statement = $this->conexao->prepare($sql);
+        $statement->execute();
+        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $array;
+    }
 
     public function selectNegocio()
     {
@@ -88,11 +118,13 @@ class funcionario
             ,s.descricao as situacao
             ,n.descricao as negocio
             ,ca.descricao as cargo
+            ,t.descricao as tipo_funcionario
         from cadastro_afungaz c
         left join pessoa p on p.cnpj_cpf = c.cnpj_cpf
         left join situacao_funcionario s on s.id = c.id_situacao
         left join negocio n on n.id = c.id_negocio
         left join cargo ca on ca.id = c.id_cargo
+        left join tipo_funcionario t on t.id = c.id_tipo_funcionario
 
         where 
         c.id_situacao = 1
@@ -139,11 +171,13 @@ class funcionario
             ,s.descricao as situacao
             ,n.descricao as negocio
             ,ca.descricao as cargo
+            ,t.descricao as tipo_funcionario
         from cadastro_afungaz c
         left join pessoa p on p.cnpj_cpf = c.cnpj_cpf
         left join situacao_funcionario s on s.id = c.id_situacao
         left join negocio n on n.id = c.id_negocio
         left join cargo ca on ca.id = c.id_cargo
+        left join tipo_funcionario t on t.id = c.id_tipo_funcionario
 
         where c.cnpj_cpf is not null
         $var_aux1
@@ -157,12 +191,8 @@ class funcionario
         return $array;
     }
 
-    public function cancelaAgendamento($id,$cnpj_cpf){
-        $sql = "UPDATE agendamento set id_situacao = 2 where id = $id" ;
-        $statement = $this->conexao->prepare($sql);
-        $update = $statement->execute();
-
-        $sql = "INSERT INTO cancela_agendamento VALUES ($id,'$cnpj_cpf ',CURRENT_TIMESTAMP())" ;
+    public function updateFuncionario($cnpj_cpf,$id_situacao,$id_tipo_funcionario){
+        $sql = "UPDATE cadastro_afungaz set id_situacao = $id_situacao where id_tipo_funcionario = $id_tipo_funcionario" ;
         $statement = $this->conexao->prepare($sql);
         $update = $statement->execute();
 

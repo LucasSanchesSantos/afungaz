@@ -1,4 +1,6 @@
 <?php
+    $config = include("{$_SERVER['DOCUMENT_ROOT']}/afungaz/config.php");
+
     include 'classes/banco.class.agendamento.php';
     $object = new agendamento;
 
@@ -11,7 +13,7 @@
     }
 
     if($_SESSION['id_tipo_funcionario'] <> 2){
-        header('location:http://localhost/afungaz');
+        header('location:'.$config['URL']);
     }
 
     $array_filter = $object->readAgendamento();
