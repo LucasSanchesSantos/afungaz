@@ -5,7 +5,7 @@
             <span>Copyright &copy; Afungaz <?= date('Y') ?></span>
         </div>
     <div class="text-center text-muted">
-        Desenvolvido por SK Sistemas - (44) 99702-9956
+        Desenvolvido por SK Sistemas
     </div>
 </footer>
 
