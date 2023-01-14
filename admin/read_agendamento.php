@@ -146,7 +146,7 @@
                     echo '<td width=200>';
                     if($row['id_situacao'] <> 3){
                     echo '<form action="" method="POST" class="text-center">';       
-                    echo '<input type="submit" name="id_cancel" class="btn bg-transparent" id=span1 value="'.$row['id'].'"></input>';    
+                    echo '<button type="submit" name="id_cancel" class="btn btn-danger" value="'.$row['id'].'"><i class="bi bi-trash3-fill"></i></button>';    
                     echo '</form>';
                     echo '</td>';
                     }

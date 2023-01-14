@@ -17,8 +17,9 @@ class agendamento
         try {
             $this->conexao = new PDO("mysql:host=$this->host;
             dbname=$this->database", "$this->user", "$this->password");
+            $this->conexao->exec("set names utf8mb4");
         } catch (\PDOException $e) {
-            echo "NÃ£o foi possÃ­vel estabelecer a conexÃ£o 
+            echo "Não foi possível estabelecer a conexão 
             com o banco de dados: Erro" . $e->getCode();
         }
     }
@@ -79,7 +80,7 @@ class agendamento
             ,n.descricao as negocio
             ,a.id
             ,concat(LPAD(day(a.data_agendamento),2,'0'),'/',LPAD(month(data_agendamento),2,'0'),'/',year(data_agendamento)) as data_agendamento
-            ,case when a.hora = 0 then 'PerÃ­odo inegral' else CONCAT(a.hora,':00') end as hora
+            ,case when a.hora = 0 then 'Inegral' else CONCAT(a.hora,':00') end as hora
             ,l.local_origem
             ,s.descricao as situacao
             ,a.id_situacao
@@ -104,7 +105,7 @@ class agendamento
 
     public function readAgendamentoFilter($local_origem_consulta,$usuario,$data_agendamento_consulta_inicio,$data_agendamento_consulta_fim,$hora,$situacao)
     {   
-        //estabelecendo um valor de vazio para nÃ£o precisar fazer vÃ¡rios else. Se elas nÃ£o estiverem setadas como vazio da erro.
+        //estabelecendo um valor de vazio para não precisar fazer vários else. Se elas não estiverem setadas como vazio da erro.
         $var_aux1 = ''; 
         $var_aux2 = ''; 
         $var_aux3 = ''; 
@@ -128,8 +129,8 @@ class agendamento
             p.nome
             ,n.descricao as negocio
             ,a.id
-            ,a.data_agendamento
-            ,case when a.hora = 0 then 'PerÃ­odo inegral' else CONCAT(a.hora,':00') end as hora
+            ,concat(LPAD(day(a.data_agendamento),2,'0'),'/',LPAD(month(data_agendamento),2,'0'),'/',year(data_agendamento)) as data_agendamento
+            ,case when a.hora = 0 then 'Inegral' else CONCAT(a.hora,':00') end as hora
             ,l.local_origem
             ,s.descricao as situacao
             ,a.id_situacao
@@ -159,7 +160,7 @@ class agendamento
         $statement = $this->conexao->prepare($sql);
         $update = $statement->execute();
 
-        $sql = "INSERT INTO cancela_agendamento VALUES ($id,'$cnpj_cpf ',CURRENT_TIMESTAMP())" ;
+        $sql = "INSERT INTO cancela_agendamento VALUES ($id,'$cnpj_cpf',CURRENT_TIMESTAMP())" ;
         $statement = $this->conexao->prepare($sql);
         $update = $statement->execute();
 

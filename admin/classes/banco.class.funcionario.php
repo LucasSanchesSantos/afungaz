@@ -140,9 +140,9 @@ class funcionario
     public function readFuncionarioFilter($usuario,$situacao,$negocio,$cargo)
     {   
         //estabelecendo um valor de vazio para não precisar fazer vários else. Se elas não estiverem setadas como vazio da erro.
-        $var_aux1 = ''; 
-        $var_aux2 = ''; 
-        $var_aux3 = ''; 
+        $var_aux1 = '';
+        $var_aux2 = '';
+        $var_aux3 = '';
         $var_aux4 = '';
         
         if($usuario <> 0){

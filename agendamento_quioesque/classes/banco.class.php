@@ -73,7 +73,12 @@ class quioesque
     public function readQuioesque()
     {
         $sql = 
-        "SELECT a.* 
+        "SELECT a.id
+            ,a.cnpj_cpf
+            ,concat(LPAD(day(a.data_agendamento),2,'0'),'/',LPAD(month(data_agendamento),2,'0'),'/',year(data_agendamento)) as data_agendamento
+            ,a.id_local
+            ,a.id_situacao
+            ,a.hora
             ,l.local_origem
         from agendamento a
         left join local l on l.id = a.id_local  
@@ -100,7 +105,12 @@ class quioesque
         }
 
         $sql = 
-        "SELECT a.* 
+        "SELECT a.id
+            ,a.cnpj_cpf
+            ,concat(LPAD(day(a.data_agendamento),2,'0'),'/',LPAD(month(data_agendamento),2,'0'),'/',year(data_agendamento)) as data_agendamento
+            ,a.id_local
+            ,a.id_situacao
+            ,a.hora
             ,l.local_origem
         from agendamento a
         left join local l on l.id = a.id_local  
