@@ -1,6 +1,6 @@
 <?php
     include 'classes/banco.class.php';
-    $object = new quioesque;
+    $object = new quiosque;
 
     include '../class_start/banco.class.login.php';
     $obj = new banco;

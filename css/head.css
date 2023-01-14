@@ -1,8 +1,15 @@
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+
 thead{
     background-color:rgb(47, 49, 146);
     color: white;
 }
 
+.bg-grey{
+    background-color: #e2e5ea;
+}
 .bg-dark-blue{
     background-color:rgb(47, 49, 146);
 }
@@ -13,7 +20,7 @@ thead{
 
 .btn-dark-blue{
     --bs-btn-color: #fff;
-    --bs-btn-bg: #4e73df;
+    --bs-btn-bg: rgb(47, 49, 146);;
     --bs-btn-border-color: #0d6efd;
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #0b5ed7;
@@ -26,7 +33,6 @@ thead{
     --bs-btn-disabled-color: #fff;
     --bs-btn-disabled-bg: #0d6efd;
     --bs-btn-disabled-border-color: #0d6efd;
-    max-width: 150px;
 }
 
 .div-content{
