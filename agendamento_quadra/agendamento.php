@@ -37,118 +37,138 @@
     // var_dump($array_filter);
     include '../components/head.php';
 ?>
-    <div class="mt-3 d-flex justify-content-center p-2">
+<div class="h2 text-center mb-3 fw-bold">Controle de Quadras / Campos</div>
+
+<div class="mt-2 p-2">
+    <div class="bg-light px-4 py-2 border rounded shadow mb-3">
         <form action="" method="POST">
-        <div class="form-group ">
-            <label>Campo</label>
-            <select required class="form-control" type="number" name="local_origem_consulta">
-                <option value="0">Selecione</option>
-                <?php $array = $object->readLocal();
-                
-                foreach ($array as $key => $row) {
-                    echo '<option value='.$row['id'].'>'.$row['local_origem'].'</option>';
-                }
-                ?>
-            </select>
-        </div>
+            <div class="row">
+                <div class="form-group col-xl-4 col-lg-4 mt-2 mb-3">
+                    <label class="mb-2 fw-bold">Quadra / Campo</label>
+                    <select required class="form-control" type="integer" name="local_origem">
+                        <option value="0">Selecione</option>
+                        <?php $array = $object->readLocal();
 
-        <div class="form-group btn">
-            <label>De</label>
-            <input type="date" required  class="form-control" min="<?php echo date('Y-m-d')?>"
-            name="data_agendamento_consulta_inicio" 
-            value="<?php 
-                        if(!isset($_POST['data_agendamento_consulta_inicio'])){
-                            $date = date('Y-m-d'); echo $date;
-                        }else
-                            echo $_POST['data_agendamento_consulta_inicio'];
-                    ?>">
-        </div>
+                        foreach ($array as $key => $row) {
+                            echo '<option value=' . $row['id'] . '>' . $row['local_origem'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
 
-        <div class="form-group btn">
-            <label>Até</label>
-            <input type="date" required  class="form-control" min="<?php echo date('Y-m-d')?>"
-            name="data_agendamento_consulta_fim" 
-            value="<?php 
-                        if(!isset($_POST['data_agendamento_consulta_fim'])){
-                            $date = date('Y-m-d'); echo $date;
-                        }else
-                            echo $_POST['data_agendamento_consulta_fim'];
-                    ?>">
-        </div>
+                <div class="form-group col-xl-3 col-lg-3 mt-2 mb-3">
+                    <label class="mb-2 fw-bold">Data</label>
+                    <input type="date" required class="form-control" min="<?php echo date('Y-m-d') ?>" name="data_agendamento" value="<?php $date = date('Y-m-d');
+                                                                                                                                        echo $date; ?>">
+                </div>
 
-        <button type="submit" class="btn btn-primary " >
-            Consultar
-        </button>
+                <div class="form-group col-xl-3 col-lg-3 mt-2 mb-3">
+                    <label class="mb-2 fw-bold">Hora</label>
+                    <select required class="form-control" type="numeric" name="hora">
+                        <option value="0">Selecione</option>
+                        <?php
+                            for($i=10; $i <= 22; $i++){
+                                echo '<option value='.$i.'>'.$i.":00".'</option>';
+                            }   
+                        ?>
+                    </select>
+                </div>
 
+                <div class="d-flex align-items-end col-xl-2 col-lg-2 mt-2 mb-3">
+                    <button type="submit" class="btn btn-success w-100 fw-bold">
+                        Cadastrar
+                    </button>
+                </div>
+            </div>
         </form>
-    </div>    
-
-    <div class="container d-flex align-items-center justify-content-between" id="title"> 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col" class="text-center">Campos</th>
-                    <th scope="col" class="text-center">Data</th>
-                    <th scope="col" class="text-center">Hora</th>
-                    <th scope="col" class="text-center">Situação</th>
-                </tr>
-            </thead>    
-            <tbody>
-            <?php
-
-                foreach ($array_filter as $key => $row) {
-                    echo '<tr>';
-                    echo '<th class="text-center">'. $row['local_origem'].'</th>';
-                    echo '<th class="text-center">'. $row['data_agendamento'].'</th>';
-                    echo '<th class="text-center">'. $row['hora'].":00".'</th>';
-                    echo '<th class="text-center">Agendado</th>';
-                }
-              
-            ?>
-            </tbody>
-        </table>              
-
     </div>
+</div>
 
-    <div class="mt-3 d-flex justify-content-center p-2">
-            <form action="" method="POST">
-            <div class="form-group ">
-                <label>Número do quiosque</label>
-                <select required class="form-control" type="integer" name="local_origem">
-                    <option value="0">Selecione</option>
-                    <?php $array = $object->readLocal();
-                    
-                    foreach ($array as $key => $row) {
-                        echo '<option value='.$row['id'].'>'.$row['local_origem'].'</option>';
-                    }
-                    ?>
-                </select>
-            </div>
+<div class="mt-2 p-2">
+    <div class="bg-light px-4 py-2 border rounded shadow mb-3">
+        <form action="" method="POST">
+            <div class="row">
+                <div class="form-group col-lg-4 mt-2 mb-3">
+                    <label class="mb-2 fw-bold">Quadra / Campo</label>
+                    <select class="form-control" type="number" name="local_origem_consulta">
+                        <option value="0">Selecione</option>
+                        <?php 
+                            $array = $object->readLocal();
 
-            <div class="form-group btn">
-                <label>Data</label>
-                <input type="date" required  class="form-control" min="<?php echo date('Y-m-d')?>"
-                name="data_agendamento" value="<?php $date = date('Y-m-d'); echo $date;?>">
-            </div>
+                            foreach ($array as $key => $row) {
+                                echo '<option value=' . $row['id'] . '>' . $row['local_origem'] . '</option>';
+                            }
+                        ?>
+                    </select>
+                </div>
 
-            <div class="form-group btn">
-                <label>Hora</label>
-                <select required class="form-control" type="numeric" name="hora">
-                    <option value="0">Selecione</option>
+                <div class="form-group col-lg-3 mt-2 mb-3">
+                    <label class="mb-2 fw-bold">De</label>
+                    <input type="date" class="form-control" min="<?php echo date('Y-m-d') ?>" name="data_agendamento_consulta_inicio" value="<?php
+                                                                                                                                            if (!isset($_POST['data_agendamento_consulta_inicio'])) {
+                                                                                                                                                $date = date('Y-m-d');
+                                                                                                                                                echo $date;
+                                                                                                                                            } else
+                                                                                                                                                echo $_POST['data_agendamento_consulta_inicio'];
+                                                                                                                                            ?>">
+                </div>
+
+                <div class="form-group col-lg-3 mt-2 mb-3">
+                    <label class="mb-2 fw-bold">Até</label>
+                    <input type="date" class="form-control" min="<?php echo date('Y-m-d') ?>" name="data_agendamento_consulta_fim" value="<?php
+                                                                                                                                            if (!isset($_POST['data_agendamento_consulta_fim'])) {
+                                                                                                                                                $date = date('Y-m-d');
+                                                                                                                                                echo $date;
+                                                                                                                                            } else
+                                                                                                                                                echo $_POST['data_agendamento_consulta_fim'];
+                                                                                                                                            ?>">
+                </div>
+
+                <div class="col-lg-2 d-flex align-items-end mt-2 mb-3">
+                    <button type="submit" class="btn btn-dark-blue w-100 fw-bold">
+                        Consultar
+                    </button>
+                </div>
+            </div>                                                                                                                               
+        </form>
+
+        <div class="d-flex align-items-center justify-content-between mt-2" id="title">
+            <table class="table table-hover">
+                <thead class="bg-grey text-dark">
+                    <tr>
+                        <th scope="col" class="text-center">Número quadras / campos</th>
+                        <th scope="col" class="text-center">Data</th>
+                        <th scope="col" class="text-center">Situação</th>
+                        <!--<th scope="col" class="text-center">Ação</th>-->
+                    </tr>
+                </thead>
+                <tbody>
                     <?php
-                        for($i=10; $i <= 22; $i++){
-                            echo '<option value='.$i.'>'.$i.":00".'</option>';
-                        }   
+                        if (empty($array_filter)) {
+                            echo '<tr class="bg-white">';
+                            echo    '<td class="text-center align-middle" colspan=3>Nenhum registro encontrado.</td>';
+                            echo '</tr>';
+                        }
+
+                        foreach ($array_filter as $key => $row) {
+                            echo '<tr class="bg-white">';
+                            echo    '<td class="text-center align-middle">' . $row['local_origem'] . '</td>';
+                            echo    '<td class="text-center align-middle">' . $row['data_agendamento'] . '</td>';
+                            echo    '<td class="text-center align-middle">Agendado</td>';
+                            /*echo    '<td class="text-center align-middle">
+                                       <button class="btn btn-danger">
+                                           <i class="bi bi-trash-fill"></i>
+                                       </button>
+                                    </td>';*/
+                            echo '</tr>';
+                        }
                     ?>
-                </select>
-            </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-            <button type="submit" class="btn btn-primary " >
-                Agendar
-            </button>
-
-            </form>
-        </div>     
 <?php 
     include '../components/footer.php';
 ?> 
