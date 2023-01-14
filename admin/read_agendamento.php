@@ -35,6 +35,7 @@
     }
     include '../components/head.php';
 ?>
+<link rel="stylesheet" type="text/css" href="<?= $config['URL'] ?>/css/head.css">
     <div class="mt-3 d-flex justify-content-center p-2">
         <form action="" method="POST">
         <div class="form-group ">
@@ -144,8 +145,8 @@
                     echo '<th class="text-center">'. $row['situacao'].'</th>';
                     echo '<td width=200>';
                     if($row['id_situacao'] <> 3){
-                    echo '<form action="" method="POST">';       
-                    echo '<input type="submit" name="id_cancel" style="width:100;height:100" value="'.$row['id'].'"'."teste".' </input>';     
+                    echo '<form action="" method="POST" class="text-center">';       
+                    echo '<input type="submit" name="id_cancel" class="btn bg-transparent" id=span1 value="'.$row['id'].'"></input>';    
                     echo '</form>';
                     echo '</td>';
                     }

@@ -114,7 +114,7 @@ class user
 
         if($update){
             echo '<script> alert("Alterado com sucesso!");
-            window.location.href="/afungaz/user/user.php";</script>';
+            window.location.href="/afungaz/user/read_user.php";</script>';
         }else{
             echo '<script>alert("Erro ao alterar. Contate um administrador")</script>';
         }

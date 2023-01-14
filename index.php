@@ -14,7 +14,9 @@
     include './components/head.php';
 ?>
 
-<h2 class="text-center">Sistema do BOI</h2>
+<div class="container">
+    <img src="images/afungaz.png"  width="80%">
+</div>
 
 <?php 
     include './components/footer.php';

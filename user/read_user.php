@@ -96,8 +96,8 @@
                     echo '<th class="text-center">'. $row['hora'].'</th>';
                     echo '<th class="text-center">Agendado</th>';
                     echo '<td width=250>';
-                    echo '<form action="" method="POST">';       
-                    echo '<input type="submit" id=cancel name="cancel" class="btn bg-transparent" style="width:100;height:100" value="'.$row['id'].'"'."teste".' </input>';     
+                    echo '<form action="" method="POST" class="text-center">';       
+                    echo '<input type="submit" name="cancel" class="btn bg-transparent" id=span1 style="width:1;height:1" value="'.$row['id'].'"></input>';    
                     echo '</form>';
                     echo '</td>';
                 }

@@ -78,7 +78,7 @@ class agendamento
             p.nome
             ,n.descricao as negocio
             ,a.id
-            ,a.data_agendamento
+            ,concat(LPAD(day(a.data_agendamento),2,'0'),'/',LPAD(month(data_agendamento),2,'0'),'/',year(data_agendamento)) as data_agendamento
             ,case when a.hora = 0 then 'Período inegral' else CONCAT(a.hora,':00') end as hora
             ,l.local_origem
             ,s.descricao as situacao

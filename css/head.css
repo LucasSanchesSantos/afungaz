@@ -55,3 +55,12 @@ td {
     padding: 10px;
     border: 1px solid grey;
 }
+
+#span1{
+    background-image: url(../images/cancel.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 2.5em;
+    padding-left: 2.5em;
+    color:#00000000
+}
