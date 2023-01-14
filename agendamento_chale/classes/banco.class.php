@@ -17,6 +17,7 @@ class quiosque
         try {
             $this->conexao = new PDO("mysql:host=$this->host;
             dbname=$this->database", "$this->user", "$this->password");
+            $this->conexao->exec("set names utf8mb4");
         } catch (\PDOException $e) {
             echo "Não foi possível estabelecer a conexão 
             com o banco de dados: Erro" . $e->getCode();
@@ -72,7 +73,12 @@ class quiosque
     public function readChale()
     {
         $sql = 
-        "SELECT a.* 
+        "SELECT a.id
+            ,a.cnpj_cpf
+            ,concat(LPAD(day(a.data_agendamento),2,'0'),'/',LPAD(month(data_agendamento),2,'0'),'/',year(data_agendamento)) as data_agendamento
+            ,a.id_local
+            ,a.id_situacao
+            ,a.hora
             ,l.local_origem
         from agendamento a
         left join local l on l.id = a.id_local  
@@ -98,7 +104,12 @@ class quiosque
         }
 
         $sql = 
-        "SELECT a.* 
+        "SELECT a.id
+            ,a.cnpj_cpf
+            ,concat(LPAD(day(a.data_agendamento),2,'0'),'/',LPAD(month(data_agendamento),2,'0'),'/',year(data_agendamento)) as data_agendamento
+            ,a.id_local
+            ,a.id_situacao
+            ,a.hora
             ,l.local_origem
         from agendamento a
         left join local l on l.id = a.id_local  

@@ -17,6 +17,7 @@ class user
         try {
             $this->conexao = new PDO("mysql:host=$this->host;
             dbname=$this->database", "$this->user", "$this->password");
+            $this->conexao->exec("set names utf8mb4");
         } catch (\PDOException $e) {
             echo "Não foi possível estabelecer a conexão 
             com o banco de dados: Erro" . $e->getCode();
@@ -50,7 +51,7 @@ class user
         "SELECT 
             a.id
             ,a.data_agendamento
-            ,case when a.hora = 0 then 'Período inegral' else CONCAT(a.hora,':00') end as hora
+            ,case when a.hora = 0 then 'Inegral' else CONCAT(a.hora,':00') end as hora
             ,l.local_origem
         from agendamento a
         left join local l on l.id = a.id_local  
@@ -85,10 +86,10 @@ class user
         "SELECT 
             a.id
             ,a.data_agendamento
-            ,case when a.hora = 0 then 'Período inegral' else CONCAT(a.hora,':00') end as hora
+            ,case when a.hora = 0 then 'inegral' else CONCAT(a.hora,':00') end as hora
             ,l.local_origem
         from agendamento a
-        left join local l on l.id = a.id_local  
+        left join local l on l.id = a.id_local
         left join tipo_local t on t.id = l.id_tipo_local
 
         where a.id_situacao = 1
@@ -108,7 +109,7 @@ class user
         $statement = $this->conexao->prepare($sql);
         $update = $statement->execute();
 
-        $sql = "INSERT INTO cancela_agendamento VALUES ($id,'$cnpj_cpf ',CURRENT_TIMESTAMP())" ;
+        $sql = "INSERT INTO cancela_agendamento VALUES ($id,'$cnpj_cpf',CURRENT_TIMESTAMP())" ;
         $statement = $this->conexao->prepare($sql);
         $update = $statement->execute();
 
