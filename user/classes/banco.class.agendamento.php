@@ -1,5 +1,5 @@
 <?php
-class user
+class agendamento
 {
     private $host = "afungaz.mysql.dbaas.com.br";
     private $database = "afungaz";
@@ -34,7 +34,6 @@ class user
         left join tipo_local t on t.id = l.id_tipo_local
 
         order by 1
-
         ";
 
         $statement = $this->conexao->prepare($sql);
@@ -50,7 +49,7 @@ class user
         $sql = 
         "SELECT 
             a.id
-            ,a.data_agendamento
+            ,concat(LPAD(day(a.data_agendamento),2,'0'),'/',LPAD(month(data_agendamento),2,'0'),'/',year(data_agendamento)) as data_agendamento
             ,case when a.hora = 0 then 'Inegral' else CONCAT(a.hora,':00') end as hora
             ,l.local_origem
         from agendamento a
@@ -63,11 +62,8 @@ class user
         and a.cnpj_cpf = '$var_aux'
         order by l.local_origem, a.data_agendamento";
 
-        //prepara o sql
         $statement = $this->conexao->prepare($sql);
-        //executa
         $statement->execute();
-        //tras um array completo do sql
         $array = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $array;
     }
@@ -85,7 +81,7 @@ class user
         $sql = 
         "SELECT 
             a.id
-            ,a.data_agendamento
+            ,concat(LPAD(day(a.data_agendamento),2,'0'),'/',LPAD(month(data_agendamento),2,'0'),'/',year(data_agendamento)) as data_agendamento
             ,case when a.hora = 0 then 'inegral' else CONCAT(a.hora,':00') end as hora
             ,l.local_origem
         from agendamento a
@@ -121,6 +117,29 @@ class user
         }
     }
 
+    public function readForUpdate($id)
+    {
+        $sql = 
+        "SELECT 
+            a.id
+            ,a.cnpj_cpf
+            ,a.data_agendamento
+            ,a.id_local
+            ,a.hora
+            -- ,case when a.hora = 0 then 'Inegral' else CONCAT(a.hora,':00') end as hora
+            ,l.local_origem
+        from agendamento a
+        left join local l on l.id = a.id_local  
+        left join tipo_local t on t.id = l.id_tipo_local
+
+        where a.id = $id
+        ";
+
+        $statement = $this->conexao->prepare($sql);
+        $statement->execute();
+        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $array;
+    }
     
     
 }

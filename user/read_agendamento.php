@@ -1,6 +1,6 @@
 <?php
-    include 'classes/banco.class.php';
-    $object = new user;
+    include 'classes/banco.class.agendamento.php';
+    $object = new agendamento;
 
     include '../class_start/banco.class.login.php';
     $obj = new banco;
@@ -96,6 +96,7 @@
                     echo '<th class="text-center">'. $row['hora'].'</th>';
                     echo '<th class="text-center">Agendado</th>';
                     echo '<td width=250>';
+                    echo '<a class="btn btn-warning" href="/afungaz/user/update_agendamento.php?id='.$row['id'].'">Editar</a>';             
                     echo '<form action="" method="POST" class="text-center">';       
                     echo '<input type="submit" name="cancel" class="btn bg-transparent" id=span1 style="width:1;height:1" value="'.$row['id'].'"></input>';    
                     echo '</form>';

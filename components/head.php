@@ -70,10 +70,10 @@
                             <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/agendamento_quadra/agendamento.php' ? 'active' : '' ?>" aria-current="page" href="<?= $config['URL'] ?>agendamento_quadra/agendamento.php"><i class="bi bi-calendar3 me-2"></i>Agendar Campos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/user/read_user.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>user/read_user.php"><i class="bi bi-clock-fill me-2"></i>Meus Agendamentos</a>
+                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/user/read_agendamento.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>user/read_agendamento.php"><i class="bi bi-clock-fill me-2"></i>Meus Agendamentos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/user/update.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>user/update.php"><i class="bi bi-person-fill me-2"></i>Manutenção de Cadastro</a>
+                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/user/user_update.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>user/user_update.php"><i class="bi bi-person-fill me-2"></i>Manutenção de Cadastro</a>
                         </li>
 
                         <?php if ($_SESSION['id_tipo_funcionario'] == 2) { ?>
