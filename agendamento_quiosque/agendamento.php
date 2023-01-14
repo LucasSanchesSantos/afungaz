@@ -125,7 +125,7 @@
                         <th scope="col" class="text-center">Número quiosques</th>
                         <th scope="col" class="text-center">Data</th>
                         <th scope="col" class="text-center">Situação</th>
-                        <th scope="col" class="text-center">Ação</th>
+                        <!--<th scope="col" class="text-center">Ação</th>-->
                     </tr>
                 </thead>
                 <tbody>
@@ -141,11 +141,11 @@
                             echo    '<td class="text-center align-middle">' . $row['local_origem'] . '</td>';
                             echo    '<td class="text-center align-middle">' . $row['data_agendamento'] . '</td>';
                             echo    '<td class="text-center align-middle">Agendado</td>';
-                            echo    '<td class="text-center align-middle">
+                            /*echo    '<td class="text-center align-middle">
                                        <button class="btn btn-danger">
                                            <i class="bi bi-trash-fill"></i>
                                        </button>
-                                    </td>';
+                                    </td>';*/
                             echo '</tr>';
                         }
                     ?>

@@ -81,7 +81,7 @@ class quiosque
         where t.descricao = 'Quiosque'
         and a.id_situacao = 1
         and a.data_agendamento >= CURDATE()
-        order by a.data_agendamento, l.local_origem";
+        order by a.data_agendamento, l.local_origem order by asc";
 
         $statement = $this->conexao->prepare($sql);
         $statement->execute();
