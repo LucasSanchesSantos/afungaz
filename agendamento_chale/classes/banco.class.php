@@ -1,5 +1,5 @@
 <?php
-class quioesque
+class quiosque
 {
     private $host = "afungaz.mysql.dbaas.com.br";
     private $database = "afungaz";
@@ -51,7 +51,7 @@ class quioesque
         $rows = $statement->rowCount();
 
         if($rows){
-            echo '<script>alert("Essa data já está reservada para este Quioesque");</script>';
+            echo '<script>alert("Essa data já está reservada para este Quiosque");</script>';
             
         }   else{
             $cpf = $_SESSION['cnpj_cpf']; 

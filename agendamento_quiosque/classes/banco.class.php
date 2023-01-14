@@ -1,5 +1,5 @@
 <?php
-class quioesque
+class quiosque
 {
     private $host = "afungaz.mysql.dbaas.com.br";
     private $database = "afungaz";
@@ -52,7 +52,7 @@ class quioesque
         $rows = $statement->rowCount();
 
         if($rows){
-            echo '<script>alert("Essa data já está reservada para este Quioesque");</script>';
+            echo '<script>alert("Essa data já está reservada para este Quiosque");</script>';
             
         }   else{
             $cpf = $_SESSION['cnpj_cpf']; 
@@ -61,8 +61,7 @@ class quioesque
             $statement = $this->conexao->prepare($sql);
             $resultado = $statement->execute();
             if ($resultado) {
-                echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");
-                window.location.href="/afungaz/index.php";</script>';
+                echo '<script>alert("Registrado com sucesso!");</script>';
                 } else {
                 echo '<script>alert("Erro no registro!");</script>';
                 }
@@ -70,7 +69,7 @@ class quioesque
 
     }
 
-    public function readQuioesque()
+    public function readQuiosque()
     {
         $sql = 
         "SELECT a.id
@@ -87,7 +86,7 @@ class quioesque
         where t.descricao = 'Quiosque'
         and a.id_situacao = 1
         and a.data_agendamento >= CURDATE()
-        order by a.data_agendamento, l.local_origem";
+        order by a.data_agendamento, l.local_origem order by asc";
 
         $statement = $this->conexao->prepare($sql);
         $statement->execute();
@@ -95,7 +94,7 @@ class quioesque
         return $array;
     }
 
-    public function readQuioesqueFilter($local_origem_consulta,$data_agendamento_consulta_inicio,$data_agendamento_consulta_fim)
+    public function readQuiosqueFilter($local_origem_consulta,$data_agendamento_consulta_inicio,$data_agendamento_consulta_fim)
     {
 
         if($local_origem_consulta == 0){
