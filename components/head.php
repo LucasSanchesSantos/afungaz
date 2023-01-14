@@ -19,8 +19,12 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" integrity="sha384-eoTu3+HydHRBIjnCVwsFyCpUDZHZSFKEJD0mc3ZqSBSb6YhZzRHeiomAUWCstIWo" crossorigin="anonymous">
-    
+
     <link rel="stylesheet" type="text/css" href="<?= $config['URL'] ?>/css/head.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 
 <body class="bg-light">
@@ -30,7 +34,7 @@
                 <button class="navbar-toggler bg-white me-2 shadow" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand text-white fw-bold fs-4 m-0" href="/afungaz">Afungaz</a>
+                <a class="navbar-brand text-white fw-bold fs-4 m-0 d-flex align-middle" href="/afungaz"><img src="<?= $config['URL'] ?>images/afungaz-icon.png" width="190px"></a>
             </div>
             <div class="d-flex align-items-center">
                 <div class="btn-group">
@@ -57,7 +61,7 @@
                             <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/' ? 'active' : '' ?>" aria-current="page" href="<?= $config['URL'] ?>"><i class="bi bi-house me-2"></i>Início</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/agendamento_quioesque/agendamento.php' ? 'active' : '' ?>" aria-current="page" href="<?= $config['URL'] ?>agendamento_quioesque/agendamento.php"><i class="bi bi-calendar3 me-2"></i>Agendar Quioesque</a>
+                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/agendamento_quiosque/agendamento.php' ? 'active' : '' ?>" aria-current="page" href="<?= $config['URL'] ?>agendamento_quiosque/agendamento.php"><i class="bi bi-calendar3 me-2"></i>Agendar Quiosque</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/agendamento_chale/agendamento.php' ? 'active' : '' ?>" aria-current="page" href="<?= $config['URL'] ?>agendamento_chale/agendamento.php"><i class="bi bi-calendar3 me-2"></i>Agendar Chalé</a>
@@ -71,14 +75,16 @@
                         <li class="nav-item">
                             <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/user/update.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>user/update.php"><i class="bi bi-person-fill me-2"></i>Manutenção de Cadastro</a>
                         </li>
-                        <?php if($_SESSION['id_tipo_funcionario'] == 2){?>
-                        <li class="nav-item">
-                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/admin/read_agendamento.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>admin/read_agendamento.php"><i class="bi bi-person-fill me-2"></i>Relatório de agendametnos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/admin/read_funcionario.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>admin/read_funcionario.php"><i class="bi bi-person-fill me-2"></i>Relatório de funcionários</a>
-                        </li>
-                        <?php }?>
+
+                        <?php if ($_SESSION['id_tipo_funcionario'] == 2) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/admin/read_agendamento.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>admin/read_agendamento.php"><i class="bi bi-person-fill me-2"></i>Relatório de agendametnos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/admin/read_funcionario.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>admin/read_funcionario.php"><i class="bi bi-person-fill me-2"></i>Relatório de funcionários</a>
+                            </li>
+                        <?php } ?>
+
                     </ul>
                 </div>
             </div>
