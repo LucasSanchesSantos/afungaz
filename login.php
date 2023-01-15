@@ -33,7 +33,7 @@
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" method="post">
 					<span class="login100-form-title p-b-26">
-						Welcome
+						<img src="images/afungaz-icon.png" width="190px">
 					</span>
 				
 					<div class="wrap-input100 validate-input" >
@@ -56,16 +56,6 @@
 								Login
 							</button>
 						</div>
-					</div>
-
-					<div class="text-center p-t-115">
-						<span class="txt1">
-							Don’t have an account?
-						</span>
-
-						<a class="txt2" href="#">
-							Sign Up
-						</a>
 					</div>
 				</form>
 			</div>

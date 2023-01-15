@@ -37,7 +37,6 @@ class UserUpdate
         left join negocio n on n.id = c.id_negocio
 
         where c.cnpj_cpf = $cnpj_cpf
-        order by 1
         ";
 
         $statement = $this->conexao->prepare($sql);

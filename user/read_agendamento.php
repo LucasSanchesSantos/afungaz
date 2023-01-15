@@ -7,6 +7,7 @@
     session_start();
     
     $obj->checkLogin();
+    $obj->checkCadastroAfungaz();
     
     if(isset($_GET['logout'])){
         $obj->logout();

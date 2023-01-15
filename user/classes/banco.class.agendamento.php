@@ -33,7 +33,7 @@ class agendamento
         from local l
         left join tipo_local t on t.id = l.id_tipo_local
 
-        order by 1
+        order by 2
         ";
 
         $statement = $this->conexao->prepare($sql);

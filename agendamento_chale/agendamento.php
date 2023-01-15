@@ -7,7 +7,8 @@
     session_start();
     
     $obj->checkLogin();
-    
+    $obj->checkCadastroAfungaz();
+
     if(isset($_GET['logout'])){
         $obj->logout();
     }
@@ -140,11 +141,6 @@
                             echo    '<td class="text-center align-middle">' . $row['local_origem'] . '</td>';
                             echo    '<td class="text-center align-middle">' . $row['data_agendamento'] . '</td>';
                             echo    '<td class="text-center align-middle">Agendado</td>';
-                            /*echo    '<td class="text-center align-middle">
-                                       <button class="btn btn-danger">
-                                           <i class="bi bi-trash-fill"></i>
-                                       </button>
-                                    </td>';*/
                             echo '</tr>';
                         }
                     ?>

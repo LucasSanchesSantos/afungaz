@@ -43,7 +43,7 @@ class create
         $sql = 
         " SELECT *
         from cargo c
-        order by c.descricao
+        order by c.id
         ";
 
         $statement = $this->conexao->prepare($sql);

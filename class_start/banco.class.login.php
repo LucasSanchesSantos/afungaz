@@ -28,8 +28,14 @@ class banco
     {
         $sql = 
         "SELECT 
-            p.*
-            ,c.*
+            p.cnpj_cpf as cnpj_cpf
+            ,p.nome as nome
+            ,c.ramal
+            ,c.telefone
+            ,c.id_tipo_funcionario
+            ,c.id_situacao
+            ,c.id_negocio
+            ,c.id_cargo
         FROM pessoa p 
         left join cadastro_afungaz c on c.cnpj_cpf = p.cnpj_cpf
         where p.cnpj_cpf = '$cpf' 
@@ -76,7 +82,7 @@ class banco
 
     public function checkCadastroAfungaz(){
         if(!isset($_SESSION["cadastro_afungaz"]) or $_SESSION["cadastro_afungaz"] == false){
-            header('Location: primeiro_cadastro.php');
+            header('Location: /afungaz/primeiro_cadastro.php');
         }else{
             
         }

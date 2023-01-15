@@ -8,6 +8,8 @@
     $obj = new banco;
     session_start();
     $obj->checkLogin();
+    $obj->checkCadastroAfungaz();
+
     if(isset($_GET['logout'])){
         $obj->logout();
     }
@@ -16,23 +18,6 @@
         header('location:'.$config['URL']);
     }
 
-    // $array_filter = $object->readAgendamento();
-    // if($_POST){
-    //     if(!isset($_POST['data_agendamento_consulta_inicio'])){
-    //         if(!isset($_POST['id_cancel'])){}
-    //         else{
-    //             $object->cancelaAgendamento($_POST['id_cancel'],$_SESSION['cnpj_cpf']);
-    //         }
-    //     }else{
-    //         $array_filter = $object->readAgendamentoFilter($_POST['local_origem_consulta']
-    //                                                        ,$_POST['usuario']
-    //                                                        ,$_POST['data_agendamento_consulta_inicio']
-    //                                                        ,$_POST['data_agendamento_consulta_fim']
-    //                                                        ,$_POST['hora']
-    //                                                        ,$_POST['situacao']
-    //                                                        );
-    //     }
-    // }
 
     $array_filter = $object->readAgendamento();
     if($_POST){
