@@ -126,5 +126,14 @@ class quadra
         $array = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $array;
     }
+
+    public function hora(){
+        $sql = 
+        "SELECT * from hora_agendamento";
+        $statement = $this->conexao->prepare($sql);
+        $statement->execute();
+        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $array;
+    }
 }
 

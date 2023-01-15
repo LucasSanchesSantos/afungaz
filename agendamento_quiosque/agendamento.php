@@ -42,7 +42,7 @@
         <form action="" method="POST">
             <div class="row">
                 <div class="form-group col-xl-6 col-lg-6 mt-2 mb-3">
-                    <label class="mb-2 fw-bold">Número do quiosque</label>
+                    <label class="mb-2 fw-bold">Quiosque</label>
                     <select required class="form-control" type="integer" name="local_origem">
                         <option value="0">Selecione</option>
                         <?php $array = $object->readLocal();
@@ -132,7 +132,7 @@
                     <?php
                         if (empty($array_filter)) {
                             echo '<tr class="bg-white">';
-                            echo    '<td class="text-center align-middle" colspan=4>Nenhum registro encontrado.</td>';
+                            echo    '<td class="text-center align-middle" colspan=3>Nenhum registro encontrado.</td>';
                             echo '</tr>';
                         }
 

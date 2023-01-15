@@ -18,8 +18,7 @@
     <title>Afungaz</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" integrity="sha384-eoTu3+HydHRBIjnCVwsFyCpUDZHZSFKEJD0mc3ZqSBSb6YhZzRHeiomAUWCstIWo" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="<?= $config['URL'] ?>/css/head.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,6 +42,9 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
+                            <a href="<?= $config['URL'] ?>user/user_update.php" class="dropdown-item text-end" type="button">
+                                Usuário<i class="bi bi-person-gear ms-1"></i>
+                            </a>
                             <a href="?logout" class="dropdown-item text-end" type="button">
                                 Sair<i class="bi bi-box-arrow-right ms-1"></i>
                             </a>
@@ -67,7 +69,7 @@
                             <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/agendamento_chale/agendamento.php' ? 'active' : '' ?>" aria-current="page" href="<?= $config['URL'] ?>agendamento_chale/agendamento.php"><i class="bi bi-calendar3 me-2"></i>Agendar Chalé</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/agendamento_quadra/agendamento.php' ? 'active' : '' ?>" aria-current="page" href="<?= $config['URL'] ?>agendamento_quadra/agendamento.php"><i class="bi bi-calendar3 me-2"></i>Agendar Campos</a>
+                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/agendamento_quadra/agendamento.php' ? 'active' : '' ?>" aria-current="page" href="<?= $config['URL'] ?>agendamento_quadra/agendamento.php"><i class="bi bi-calendar3 me-2"></i>Agendar Quadras / Campos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/user/read_agendamento.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>user/read_agendamento.php"><i class="bi bi-clock-fill me-2"></i>Meus Agendamentos</a>
@@ -78,10 +80,10 @@
 
                         <?php if ($_SESSION['id_tipo_funcionario'] == 2) { ?>
                             <li class="nav-item">
-                                <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/admin/read_agendamento.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>admin/read_agendamento.php"><i class="bi bi-person-fill me-2"></i>Relatório de agendametnos</a>
+                                <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/admin/read_agendamento.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>admin/read_agendamento.php"><i class="bi bi-journal-text me-2"></i>Relatório de Agendamentos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/admin/read_funcionario.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>admin/read_funcionario.php"><i class="bi bi-person-fill me-2"></i>Relatório de funcionários</a>
+                                <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/admin/read_funcionario.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>admin/read_funcionario.php"><i class="bi bi-journal-text me-2"></i>Relatório de Funcionários</a>
                             </li>
                         <?php } ?>
 
