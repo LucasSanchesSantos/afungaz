@@ -16,6 +16,8 @@ class create
         try {
             $this->conexao = new PDO("mysql:host=$this->host;
             dbname=$this->database", "$this->user", "$this->password");
+            $this->conexao->exec("set names utf8mb4");
+
         } catch (\PDOException $e) {
             echo "Não foi possível estabelecer a conexão 
             com o banco de dados: Erro" . $e->getCode();
