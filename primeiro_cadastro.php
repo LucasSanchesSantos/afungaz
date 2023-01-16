@@ -47,7 +47,8 @@
 
                         <div class="form-group col-md-12 mb-3">
                             <label class="mb-2 fw-bold">Ramal</label>
-                            <input type="number" required class="form-control" name="ramal" placeholder="Ramal"
+                            <input type="number" maxlength="4" required class="form-control" maxlength="4" name="ramal" placeholder="Ramal"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
                             value="<?php 
                                     if(!isset($_POST['ramal'])){
                                     }else
@@ -58,7 +59,8 @@
 
                         <div class="form-group col-md-12 mb-3">
                             <label class="mb-2 fw-bold">Telefone</label>
-                            <input type="number" required class="form-control" name="telefone" id=telefone placeholder="Ex: 9 99999999"
+                            <input type="number" maxlength="11" required class="form-control" name="telefone" id=telefone placeholder="Ex: 9 99999999"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
                             value="<?php 
                                     if(!isset($_POST['telefone'])){
                                     }else

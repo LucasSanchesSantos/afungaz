@@ -88,7 +88,7 @@ class quadra
             $statement = $this->conexao->prepare($sql);
             $resultado = $statement->execute();
             if ($resultado) {
-                echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");window.location.href="/afungaz/index.php";</script>';
+                echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");window.location.href="/afungaz/agendamento_quadra/agendamento.php";</script>';
                 } else {
                 echo '<script>alert("Erro no registro!");</script>';
                 }

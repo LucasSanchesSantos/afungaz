@@ -37,7 +37,7 @@
 					</span>
 				
 					<div class="wrap-input100 validate-input" >
-						<input class="input100" type="text" name="cnpj_cpf">
+						<input class="input100" type="text" name="cnpj_cpf" maxlength="11">
 						<span class="focus-input100" data-placeholder="CPF"></span>
 					</div>
 

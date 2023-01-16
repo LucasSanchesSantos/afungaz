@@ -140,6 +140,7 @@
                     <tr>
                         <th scope="col" class="text-center">Número quadras / campos</th>
                         <th scope="col" class="text-center">Data</th>
+                        <th scope="col" class="text-center">Hora</th>
                         <th scope="col" class="text-center">Situação</th>
                     </tr>
                 </thead>
@@ -155,6 +156,7 @@
                             echo '<tr class="bg-white">';
                             echo    '<td class="text-center align-middle">' . $row['local_origem'] . '</td>';
                             echo    '<td class="text-center align-middle">' . $row['data_agendamento'] . '</td>';
+                            echo    '<td class="text-center align-middle">' . $row['hora'] . ':00</td>';
                             echo    '<td class="text-center align-middle">Agendado</td>';
                             echo '</tr>';
                         }

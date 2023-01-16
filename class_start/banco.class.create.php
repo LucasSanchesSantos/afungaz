@@ -59,7 +59,7 @@ class create
     $statement = $this->conexao->prepare($sql);
     $resultado = $statement->execute();
     if ($resultado) {
-        echo '<script>alert("Registrado com sucesso! Confira em Meus Agendamentos ");
+        echo '<script>alert("Cadastro realizado com sucesso!");
         window.location.href="/afungaz/index.php";</script>';
         $_SESSION['cadastro_afungaz'] = true;
         } else {

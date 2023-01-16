@@ -22,7 +22,11 @@
     include '../components/head.php';
 
     if($_POST){
-        $object->updateAgendamento($_GET['id'],$_POST['id_local'],$_POST['data_agendamento'],$_POST['hora']);
+        if(!isset($_POST['hora'])){
+            $object->updateAgendamento($_GET['id'],$_POST['id_local'],$_POST['data_agendamento'],0);
+        }else{
+            $object->updateAgendamento($_GET['id'],$_POST['id_local'],$_POST['data_agendamento'],$_POST['hora']);
+        }
     }
 
 ?>
