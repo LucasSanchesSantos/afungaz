@@ -74,10 +74,6 @@
                         <li class="nav-item">
                             <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/user/read_agendamento.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>user/read_agendamento.php"><i class="bi bi-clock-fill me-2"></i>Meus Agendamentos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/user/user_update.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>user/user_update.php"><i class="bi bi-person-fill me-2"></i>Manutenção de Cadastro</a>
-                        </li>
-
                         <?php if ($_SESSION['id_tipo_funcionario'] == 2) { ?>
                             <li class="nav-item">
                                 <a class="nav-link px-3 border-bottom <?= $uri === '/afungaz/admin/read_agendamento.php' ? 'active' : '' ?>" href="<?= $config['URL'] ?>admin/read_agendamento.php"><i class="bi bi-journal-text me-2"></i>Relatório de Agendamentos</a>
